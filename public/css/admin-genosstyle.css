@@ -458,6 +458,34 @@ body {
   justify-content: center;
   gap: 5px;
 }
+.admin .nomorsoal-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.admin .nomorsoal-wrapper .nomorsoal {
+  all: unset;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 300ms ease-in-out;
+}
+.admin .nomorsoal-wrapper .nomorsoal.terisi {
+  background-color: rgb(255, 200, 136) !important;
+}
+.admin .nomorsoal-wrapper .nomorsoal.active {
+  background-color: rgb(136, 201, 255) !important;
+}
+.admin .nomorsoal-wrapper .nomorsoal:hover {
+  background-color: #eee;
+}
 .admin .gbr-info {
   width: 100%;
 }
@@ -804,6 +832,50 @@ input.form-control {
   padding-right: 0;
 }
 .bt-primary.sml {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+}
+
+.bt-warning {
+  all: unset;
+  transition: all 0.5s;
+  display: block;
+  background-color: #ff6347;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+.bt-warning.full {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.bt-warning.sml {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+}
+
+.bt-danger {
+  all: unset;
+  transition: all 0.5s;
+  display: block;
+  background-color: #ff8f8f;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+.bt-danger.full {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.bt-danger.sml {
   padding: 3px 10px;
   font-size: 0.8rem;
 }

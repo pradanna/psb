@@ -94,8 +94,11 @@
 
 
 
-                        <button type="button" class="bt-primary m-2 ms-auto">Lihat Hasil Tes</button>
-
+                        <div class="d-flex gap-1 ms-auto">
+                            <button type="button" class="bt-primary m-2 ">Lihat Hasil Tes</button>
+                            <button type="button" class="bt-warning m-2 ">Terima Pendaftaran</button>
+                            <button type="button" class="bt-danger m-2 ">Tolak Pendaftaran</button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-4">

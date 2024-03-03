@@ -14,8 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('user.home');
+    return view('home');
 });
+
+Route::get('/pengumuman', function () {
+    return view('pengumuman');
+});
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/daftar', function () {
+    return view('auth.daftar');
+});
+
 
 Route::get('/services', function () {
     return view('user.services');
@@ -83,4 +96,8 @@ Route::get('/siswa/detail-calonsiswa', function () {
 
 Route::get('/siswa/paketsoal', function () {
     return view('siswa.soal.paketsoal');
+});
+
+Route::get('/siswa/kerjakansoal', function () {
+    return view('siswa.soal.kerjakansoal');
 });

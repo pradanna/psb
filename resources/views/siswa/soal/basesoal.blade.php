@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin || Genos Template</title>
+    <title>Calon Siswa || kerjakan Soal</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     {{-- CSS --}}
-    <link href="{{ asset('css/genosstyle.v.01.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/admin-genosstyle.css') }}" rel="stylesheet" />
 
     {{-- FONT --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,80 +58,23 @@
             </div>
             <div class="menu-container">
 
-                <ul>
-                    <li>
-                        <a class=" menu {{ Request::is('admin/dashboard') ? 'active' : '' }} tooltip"
-                            href="/admin/dashboard"><span class="material-symbols-outlined">
-                                dashboard
-                            </span>
-                            <span class="text-menu"> Beranda</span>
-                            <span class="tooltiptext">Beranda</span>
-                        </a>
-                    </li>
+                <p>Nomor Soal</p>
+                <div class="nomorsoal-wrapper">
+                    @for ($i = 1; $i < 51; $i++)
+                        <a class="nomorsoal">{{ $i }}</a>
+                    @endfor
+                </div>
 
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/tahunajaran') ? 'active' : '' }}"
-                            href="/admin/tahunajaran">
-
-                            <span class="material-symbols-outlined">
-                                forum
-                            </span>
-                            <span class="text-menu"> Tahun Ajaran</span>
-                            <span class="tooltiptext"> Tahun Ajaran</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/calonsiswa') ? 'active' : '' }}"
-                            href="/admin/calonsiswa"><span class="material-symbols-outlined">
-                                account_circle
-                            </span>
-                            <span class="text-menu"> Calon Siswa</span>
-                            <span class="tooltiptext">Calon Siswa</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/informasi') ? 'active' : '' }}"
-                            href="/admin/informasi">
-
-                            <span class="material-symbols-outlined">
-                                newsmode
-                            </span>
-                            <span class="text-menu"> Informasi</span>
-                            <span class="tooltiptext">Informasi</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/paketsoal') ? 'active' : '' }}"
-                            href="/admin/paketsoal">
-
-                            <span class="material-symbols-outlined">
-                                home_repair_service
-                            </span>
-                            <span class="text-menu"> Soal</span>
-                            <span class="tooltiptext">Soal</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/rekapitulasi') ? 'active' : '' }}"
-                            href="/admin/rekapitulasi">
-
-                            <span class="material-symbols-outlined">
-                                work_history
-                            </span>
-                            <span class="text-menu"> Rekapitulasi Nilai</span>
-                            <span class="tooltiptext">Rekapitulasi Nilai</span>
-                        </a>
-                    </li>
-
-
-                </ul>
+                <div class="mt-5">
+                    <p class="mb-0 fw-bold ">Keterangan:</p>
+                    <p class="mb-0 small">Belum Dikerjakan</p>
+                    <p class="mb-0 small"> Sudah Dikerjakan</p>
+                    <p class="mb-0 small">Indikator nomor</p>
+                </div>
 
                 <div class="footer">
                     <p class="top">Login Sebagai</p>
-                    <p class="bot">Admin</p>
+                    <p class="bot">Calon Siswa</p>
                 </div>
             </div>
         </div>

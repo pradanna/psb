@@ -98,9 +98,6 @@
 
 
 
-
-
-
                 <div class="row">
                     <div class="col-6">
                         <div class=" mb-3">
@@ -154,7 +151,7 @@
 @section('morejs')
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <!-- Scripts -->
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+
 
     <script>
         // Note that the name "myDropzone" is the camelized
@@ -163,7 +160,7 @@
             // Configuration options go here
         };
     </script>
-
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
     <script>
         $('#p-tanggallahir').datepicker({
             uiLibrary: 'bootstrap5'

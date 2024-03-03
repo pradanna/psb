@@ -24,7 +24,7 @@
                     <p class="title">Data Calon Siswa</p>
                     <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Tambah Calon Siswa</a>
                 </div>
-                <table id="tableCalon Siswa" class="table table-striped" style="width:100%">
+                <table id="tableCalon" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>Foto</th>
@@ -78,7 +78,7 @@
     <script>
         $(document).ready(function() {
 
-            var tableCalon Siswa = $('#tableCalon Siswa').DataTable({
+            var tableCalon = $('#tableCalon').DataTable({
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({
