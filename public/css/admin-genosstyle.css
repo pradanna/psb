@@ -2,6 +2,20 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.ds {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ds .dashboard-logo {
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
+  margin-bottom: 50px;
+}
+
 .admin .sidebar {
   width: 235px;
   box-shadow: 1px 0px 10px #eee;
@@ -58,7 +72,7 @@ body {
   font-size: 0.8rem;
 }
 .admin .sidebar .menu-container .menu.active {
-  background-color: #4fd0f3;
+  background-color: #17a52e;
   color: white;
 }
 .admin .sidebar .menu-container .menu:hover {
@@ -76,7 +90,7 @@ body {
   color: gray;
 }
 .admin .sidebar .footer .bot {
-  color: #4fd0f3;
+  color: #17a52e;
   font-weight: bold;
 }
 .admin .gen-body {
@@ -195,7 +209,7 @@ body {
   all: unset;
   cursor: pointer;
   display: block;
-  color: #4fd0f3;
+  color: #17a52e;
   border-radius: 0;
   transition: all 300ms ease-in-out;
 }
@@ -245,7 +259,7 @@ body {
 .admin .gen-body .gen-nav .menudropdown.notif .title-container .action {
   all: unset;
   font-weight: bold;
-  color: #4fd0f3;
+  color: #17a52e;
   cursor: pointer;
   transition: all 100ms ease-in-out;
 }
@@ -343,7 +357,7 @@ body {
   color: gray;
 }
 .admin .gen-body .gen-content .dashboard .status-container .card-status .content .stat .val {
-  color: #4fd0f3;
+  color: #17a52e;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -357,7 +371,7 @@ body {
   color: green;
 }
 .admin .gen-body .gen-content .dashboard .status-container .card-status .content .report p span.down {
-  color: #4fd0f3;
+  color: #17a52e;
 }
 .admin .gen-body .gen-content .dashboard .status-container .card-status .icon-container {
   width: 50px;
@@ -366,7 +380,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #4fd0f3;
+  background-color: #17a52e;
 }
 .admin .gen-body .gen-content .dashboard .status-container .card-status .icon-container span {
   color: white;
@@ -436,13 +450,16 @@ body {
   all: unset;
   display: flex;
   background-color: rgb(204, 237, 250);
-  color: #4fd0f3;
+  color: #17a52e;
   padding: 3px 20px;
   border-radius: 50px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+.admin .gbr-info {
+  width: 100%;
 }
 .admin.minimize .sidebar {
   width: 70px;
@@ -540,8 +557,8 @@ body {
 }
 .admin .page-item.active .page-link {
   color: white !important;
-  background-color: #4fd0f3 !important;
-  border-color: #4fd0f3 !important;
+  background-color: #17a52e !important;
+  border-color: #17a52e !important;
 }
 .admin div.dataTables_wrapper div.dataTables_filter {
   text-align: end;
@@ -581,7 +598,7 @@ body {
 .admin .btn-primary-sm {
   all: unset;
   cursor: pointer;
-  background-color: #4fd0f3;
+  background-color: #17a52e;
   padding: 3px 10px;
   border-radius: 5px;
   color: white;
@@ -620,13 +637,28 @@ body {
 .admin .btn-danger-sm:hover {
   background-color: #f34d4d;
 }
+.admin .btn-status-sm {
+  all: unset;
+  cursor: pointer;
+  background-color: #2b4de4;
+  padding: 3px 10px;
+  border-radius: 5px;
+  color: white;
+  transition: all 300ms ease-in-out;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.admin .btn-status-sm:hover {
+  background-color: #1f0481;
+}
 .admin .breadcrumb-item a {
   all: unset !important;
   color: gray;
   cursor: pointer !important;
 }
 .admin .breadcrumb-item.active {
-  color: #4fd0f3 !important;
+  color: #17a52e !important;
 }
 .admin table td {
   font-size: 0.8rem;
@@ -758,7 +790,7 @@ input.form-control {
   all: unset;
   transition: all 0.5s;
   display: block;
-  background-color: #4fd0f3;
+  background-color: #17a52e;
   color: white;
   border-radius: 5px;
   font-weight: bold;
@@ -883,7 +915,7 @@ input.form-control {
     align-items: center;
   }
   .admin .gen-body .bottombar .nav-button.active {
-    color: #4fd0f3;
+    color: #17a52e;
     font-weight: bold;
   }
   .admin .gen-body .bottombar .nav-button .text-menu {

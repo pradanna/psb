@@ -21,11 +21,18 @@ Route::get('/services', function () {
     return view('user.services');
 });
 
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
 
+
+Route::get('/admin/tahunajaran', function () {
+    return view('admin.tahunajaran.tahunajaran');
+});
 
 Route::get('/admin/calonsiswa', function () {
     return view('admin.calonsiswa.calonsiswa');
@@ -39,42 +46,41 @@ Route::get('/admin/detail-calonsiswa', function () {
     return view('admin.calonsiswa.detail_calonsiswa');
 });
 
-Route::get('/admin/service', function () {
-    return view('admin.service.service');
+Route::get('/admin/informasi', function () {
+    return view('admin.informasi.informasi');
 });
 
-Route::get('/admin/tambah-service', function () {
-    return view('admin.service.tambah_service');
+
+Route::get('/admin/paketsoal', function () {
+    return view('admin.soal.paketsoal');
 });
 
-Route::get('/admin/portfolio', function () {
-    return view('admin.portfolio.portfolio');
+Route::get('/admin/soal', function () {
+    return view('admin.soal.soal');
 });
 
-Route::get('/admin/tambah-portfolio', function () {
-    return view('admin.portfolio.tambah_portfolio');
+Route::get('/admin/rekapitulasi', function () {
+    return view('admin.rekapitulasi.rekapitulasinilai');
 });
 
-Route::get('/admin/clients', function () {
-    return view('admin.clients.clients');
+
+Route::get('/siswa', function () {
+    return view('siswa.dashboard');
 });
 
-Route::get('/admin/tahunajaran', function () {
-    return view('admin.tahunajaran.tahunajaran');
+Route::get('/siswa/dashboard', function () {
+    return view('siswa.dashboard');
 });
 
-Route::get('/admin/inbox', function () {
-    return view('admin.inbox.inbox');
+
+Route::get('/siswa/tambah-calonsiswa', function () {
+    return view('siswa.calonsiswa.tambah_calonsiswa');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
+Route::get('/siswa/detail-calonsiswa', function () {
+    return view('siswa.calonsiswa.detail_calonsiswa');
 });
 
-Route::get('/admin/profile', function () {
-    return view('admin.profile.profile');
-});
-
-Route::get('/admin/about', function () {
-    return view('admin.about.about');
+Route::get('/siswa/paketsoal', function () {
+    return view('siswa.soal.paketsoal');
 });

@@ -1,5 +1,5 @@
 $light-background: white;
-$primary-color: #4fd0f3;
+$primary-color: #17a52e;
 $accent-color: #642aed;
 $primary-light: rgb(204, 237, 250);
 $font-sizenormal: 0.8rem;
@@ -22,6 +22,20 @@ $tinggi-navbar: 60px;
 // SIDEBAR
 body {
   font-family: "Poppins", sans-serif;
+}
+
+.ds {
+  .dashboard-logo {
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    margin-bottom: 50px;
+  }
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .admin {
@@ -559,6 +573,9 @@ body {
     }
   }
 
+  .gbr-info {
+    width: 100%;
+  }
   &.minimize {
     .sidebar {
       width: 70px;
@@ -773,6 +790,21 @@ body {
     }
   }
 
+  .btn-status-sm {
+    all: unset;
+    cursor: pointer;
+    background-color: #2b4de4;
+    padding: 3px 10px;
+    border-radius: 5px;
+    color: white;
+    transition: all 300ms ease-in-out;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background-color: #1f0481;
+    }
+  }
   .breadcrumb-item {
     a {
       all: unset !important;

@@ -10,14 +10,14 @@
             <div class="menu d-flex justify-content-between ">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="me-5">
                     <ol class="breadcrumb mb-0 ">
-                        <li class="breadcrumb-item "><a href="#">Data clients</a></li>
+                        <li class="breadcrumb-item "><a href="#">Data informasi</a></li>
                     </ol>
                 </nav>
 
                 <div class="d-flex align-items-center " style="color: gray">
                     <span class="material-symbols-outlined me-2 ">
                         error
-                    </span><span>Jika ada pertanyaan, silahkan hubungi admin</span>
+                    </span><span>Jika ada kendala, silahkan hubungi developer website</span>
                 </div>
             </div>
         </div>
@@ -27,15 +27,15 @@
                 <div class="menu-container">
                     <div class="menu overflow-hidden">
                         <div class="title-container">
-                            <p class="title">Data clients</p>
+                            <p class="title">Data informasi</p>
                         </div>
-                        <table id="tableClients" class="table table-striped" style="width:100%">
+                        <table id="tableinformasi" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Logo Clients</th>
-                                    <th>Nama clients</th>
+                                    <th>Logo informasi</th>
+                                    <th>Judul informasi</th>
+                                    <th>Isi informasi</th>
                                     <th>Action</th>
-                                    {{-- detail, ubah status pesanan --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +43,12 @@
                                     <td><img src="https://www.dreambox.id/wp-content/uploads/2022/06/15.jpg"
                                             style="height: 50px" />
                                     </td>
-                                    <td><span class="maxlines">Prabowo</span></td>
+                                    <td><span class="maxlines">Pengumuman Pendaftaran, Pengerjaan soal tes</span></td>
+                                    <td><span class="maxlines">Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                                            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+                                            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                                            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+                                            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </span></td>
 
 
                                     <td><span class="d-flex gap-1">
@@ -61,10 +66,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Logo Clients</th>
-                                    <th>Nama clients</th>
+                                    <th>Logo informasi</th>
+                                    <th>Judul informasi</th>
+                                    <th>Isi informasi</th>
                                     <th>Action</th>
-                                    {{-- detail, ubah status pesanan --}}
                                 </tr>
                             </tfoot>
                         </table>
@@ -75,23 +80,26 @@
                 <div class="menu-container">
                     <div class="menu overflow-hidden">
                         <div class="title-container">
-                            <p class="title">Tambah clients</p>
+                            <p class="title">Tambah informasi</p>
                         </div>
                         <input type="hidden" id="d-id" name="d-id">
 
                         <div class=" mb-3">
-                            <label class="form-label">Gambar Clients</label>
+                            <label class="form-label">Gambar informasi</label>
 
                             <form action="/target" class="dropzone" id="p-icon"></form>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-judulclients" name="p-judulclients"
-                                placeholder="Nama Clients">
-                            <label for="p-namaclient" class="form-label">Nama Clients</label>
+                            <input type="text" class="form-control" id="p-judulinformasi" name="p-judulinformasi"
+                                placeholder="Nama informasi">
+                            <label for="p-judulinformasi" class="form-label">Judul informasi</label>
                         </div>
 
-
+                        <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" id="p-isiinformasi" name="p-isiinformasi" placeholder="Isi informasi"> </textarea>
+                            <label for="p-isiinformasi" class="form-label">Isi informasi</label>
+                        </div>
 
                         <button type="button" class="bt-primary m-2 ms-auto">Simpan Perubahan</button>
                     </div>
@@ -109,7 +117,7 @@
     <script>
         $(document).ready(function() {
 
-            var tableclients = $('#tableclients').DataTable({
+            var tableinformasi = $('#tableinformasi').DataTable({
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({

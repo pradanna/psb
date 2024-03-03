@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin || Genos Template</title>
+    <title>Calon Siswa || Genos Template</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -53,15 +53,15 @@
         {{-- SIDEBAR --}}
         <div class="sidebar ">
             <div class="logo-container">
-                <img class="company-logos" src="{{ asset('images/local/logo-yousee-panjang.png') }}" />
-                <img class="company-logos-minimize" src="{{ asset('images/local/logo-yousee.png') }}" />
+                <img class="company-logos" src="{{ asset('images/local/logo.png') }}" />
+                <img class="company-logos-minimize" src="{{ asset('images/local/logo.png') }}" />
             </div>
             <div class="menu-container">
 
                 <ul>
                     <li>
-                        <a class=" menu {{ Request::is('admin/dashboard') ? 'active' : '' }} tooltip"
-                            href="/admin/dashboard"><span class="material-symbols-outlined">
+                        <a class=" menu {{ Request::is('siswa/dashboard') ? 'active' : '' }} tooltip"
+                            href="/siswa/dashboard"><span class="material-symbols-outlined">
                                 dashboard
                             </span>
                             <span class="text-menu"> Beranda</span>
@@ -70,19 +70,8 @@
                     </li>
 
                     <li>
-                        <a class="menu tooltip {{ Request::is('admin/tahunajaran') ? 'active' : '' }}"
-                            href="/admin/tahunajaran">
-
-                            <span class="material-symbols-outlined">
-                                forum
-                            </span>
-                            <span class="text-menu"> Master Tahun Ajaran</span>
-                            <span class="tooltiptext">Master Tahun Ajaran</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/profile') ? 'active' : '' }}"
-                            href="/admin/profile"><span class="material-symbols-outlined">
+                        <a class="menu tooltip {{ Request::is('siswa/detail-calonsiswa') ? 'active' : '' }}"
+                            href="/siswa/detail-calonsiswa"><span class="material-symbols-outlined">
                                 account_circle
                             </span>
                             <span class="text-menu"> Profile</span>
@@ -90,69 +79,23 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/artikel') ? 'active' : '' }}"
-                            href="/admin/artikel">
-
-                            <span class="material-symbols-outlined">
-                                newsmode
-                            </span>
-                            <span class="text-menu"> Artikel</span>
-                            <span class="tooltiptext">Artikel</span>
-                        </a>
-                    </li>
 
                     <li>
-                        <a class="menu tooltip {{ Request::is('admin/about') ? 'active' : '' }}" href="/admin/about">
-
-                            <span class="material-symbols-outlined">
-                                info
-                            </span>
-                            <span class="text-menu"> About</span>
-                            <span class="tooltiptext">About</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/service') ? 'active' : '' }}"
-                            href="/admin/service">
+                        <a class="menu tooltip {{ Request::is('siswa/paketsoal') ? 'active' : '' }}"
+                            href="/siswa/paketsoal">
 
                             <span class="material-symbols-outlined">
                                 home_repair_service
                             </span>
-                            <span class="text-menu"> Service</span>
-                            <span class="tooltiptext">Service</span>
+                            <span class="text-menu"> Soal</span>
+                            <span class="tooltiptext">Soal</span>
                         </a>
                     </li>
-
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/portfolio') ? 'active' : '' }}"
-                            href="/admin/portfolio">
-
-                            <span class="material-symbols-outlined">
-                                work_history
-                            </span>
-                            <span class="text-menu"> Portfolio</span>
-                            <span class="tooltiptext">Portfolio</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="menu tooltip {{ Request::is('admin/clients') ? 'active' : '' }}"
-                            href="/admin/clients">
-
-                            <span class="material-symbols-outlined">
-                                group
-                            </span>
-                            <span class="text-menu"> Clients</span>
-                            <span class="tooltiptext">Clients</span>
-                        </a>
-                    </li>
-
                 </ul>
 
                 <div class="footer">
                     <p class="top">Login Sebagai</p>
-                    <p class="bot">Admin</p>
+                    <p class="bot">Calon Siswa</p>
                 </div>
             </div>
         </div>
@@ -161,29 +104,6 @@
         {{-- BODY --}}
         <div class="gen-body  ">
 
-            {{-- BOTTOMBAR --}}
-            <div class="bottombar">
-                <a href="/admin/dashboard" class="nav-button {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined ">
-                        dashboard
-                    </span>
-                    <span class="text-menu"> Beranda</span>
-                </a>
-                <a href="/admin/datatitik" class="nav-button {{ Request::is('admin/datatitik') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined">
-                        desktop_windows
-                    </span>
-                    <span class="text-menu"> Data Titik</span>
-                </a>
-
-                <a href="/admin/profile" class="nav-button {{ Request::is('admin/profile') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined">
-                        account_circle
-                    </span>
-                    <span class="text-menu"> Profile</span>
-                </a>
-
-            </div>
 
             {{-- NAVBAR --}}
             <div class="gen-nav">
@@ -198,46 +118,7 @@
                     </a>
                 </div>
                 <div class="end">
-                    <a class="iconbtn " id="dropdownnotif" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="badges">
-                        </span>
-                        <span class="material-symbols-outlined">
-                            mail
-                        </span>
 
-                    </a>
-                    <div class="dropdown-menu menudropdown notif" aria-labelledby="dropdownnotif">
-                        <div class="title-container">
-                            <p class="title">Notification</p>
-                            <a class="action"> Clear All</a>
-                        </div>
-                        <hr>
-                        <div class="notif-container">
-                            <div class="notif-item unread">
-
-                                <div class="content-container">
-                                    <p class="title-content">Bagus Want to buy something </p>
-                                    <p class="body-content">You Have new transaction from bagus yanuar, please check!
-                                    </p>
-                                </div>
-                                <hr>
-
-                            </div>
-
-                            <div class="notif-item">
-
-                                <div class="content-container">
-                                    <p class="title-content">Bagus Want to buy something </p>
-                                    <p class="body-content">You Have new transaction from bagus yanuar, please check!
-                                    </p>
-                                </div>
-                                <hr>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="footer-container"><a href="/admin/inbox">See All Notifications</a></div>
-                    </div>
                     <div class="dropdown">
                         <div class="profile-button">
                             <div class="content">

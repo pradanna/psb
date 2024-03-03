@@ -6,14 +6,14 @@
             <div class="menu d-flex justify-content-between ">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="me-5">
                     <ol class="breadcrumb mb-0 ">
-                        <li class="breadcrumb-item "><a href="#">Data portfolio</a></li>
+                        <li class="breadcrumb-item "><a href="#">Data Rekapitulasi Nilai</a></li>
                     </ol>
                 </nav>
 
                 <div class="d-flex align-items-center " style="color: gray">
                     <span class="material-symbols-outlined me-2 ">
                         error
-                    </span><span>Jika ada pertanyaan, silahkan hubungi admin</span>
+                    </span><span>Jika ada kendala, silahkan hubungi developer website</span>
                 </div>
             </div>
         </div>
@@ -21,18 +21,16 @@
         <div class="menu-container">
             <div class="menu overflow-hidden">
                 <div class="title-container">
-                    <p class="title">Data portfolio</p>
-                    <a class="btn-primary-sm" href="/admin/tambah-portfolio">Tambah Data portfolio</a>
+                    <p class="title">Data Rekapitulasi Nilai</p>
+                    <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Kunci Nilai dan Mulai Rekapitulasi Nilai</a>
                 </div>
-                <table id="tableService" class="table table-striped" style="width:100%">
+                <table id="tableRekapitulasi Nilai" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Gambar</th>
-                            <th>Nama portfolio</th>
-                            {{-- slug otomatis ambil dari nama --}}
-                            <th>Keterangan</th>
-                            {{-- keterangan bisa kosong --}}
-                            <th>Action</th>
+                            <th>Nama Siswa</th>
+                            <th>Nilai</th>
+                            <th>Status Penerimaan</th>
+                            <th>Nomor HP</th>
                             {{-- detail, ubah status pesanan --}}
                         </tr>
                     </thead>
@@ -40,42 +38,21 @@
                         <tr>
                             <td><img src="https://www.dreambox.id/wp-content/uploads/2022/06/15.jpg" style="height: 50px" />
                             </td>
-                            <td><span class="maxlines">Billboard Film Mencari Cinta 2.000 titik</span></td>
-                            <td><span class="maxlines">Berikut ini billboard strategis di semarang, Lorem Ipsum is simply
-                                    dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                    text
-                                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make
-                                    a type specimen book. It has survived not only five centuries, but also the leap into
-                                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                    with
-                                    desktop publishing software like Aldus PageMaker including versions of Lorem
-                                    Ipsum.</span></td>
+                            <td><span class="maxlines">Joni</span></td>
+                            <td><span class="maxlines">70</span></td>
+                            <td><span class="maxlines">Tidak Lolos</span></td>
+                            <td><span class="maxlines">081238172987</span></td>
 
-                            <td><span class="d-flex gap-1">
-                                    <a class="btn-primary-sm">Lihat
-                                    </a>
-                                    <a class="btn-warning-sm">Ubah
-                                    </a>
-
-                                    <a class="btn-danger-sm deletebutton">Hapus
-                                    </a>
-                                </span>
-                            </td>
                         </tr>
 
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Gambar</th>
-                            <th>Nama portfolio</th>
-                            {{-- slug otomatis ambil dari nama --}}
-                            <th>Keterangan</th>
-                            {{-- keterangan bisa kosong --}}
-                            <th>Action</th>
-                            {{-- detail, ubah status pesanan --}}
+                            <th>Foto</th>
+                            <th>Nama Rekapitulasi Nilai</th>
+                            <th>TTL</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Nomor HP</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -88,7 +65,7 @@
     <script>
         $(document).ready(function() {
 
-            var tableportfolio = $('#tableportfolio').DataTable({
+            var tableRekapitulasi Nilai = $('#tableRekapitulasi Nilai').DataTable({
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({

@@ -13,7 +13,7 @@
                 <div class="d-flex align-items-center " style="color: gray">
                     <span class="material-symbols-outlined me-2 ">
                         error
-                    </span><span>Jika ada pertanyaan, silahkan hubungi admin</span>
+                    </span><span>Jika ada kendala, silahkan hubungi developer website</span>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="menu overflow-hidden">
                 <div class="title-container">
                     <p class="title">Data Calon Siswa</p>
-                    <a class="btn-primary-sm" href="/admin/tambah-Calon Siswa">Tambah Calon Siswa</a>
+                    <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Tambah Calon Siswa</a>
                 </div>
                 <table id="tableCalon Siswa" class="table table-striped" style="width:100%">
                     <thead>
@@ -46,7 +46,7 @@
                             <td><span class="maxlines">081238172987</span></td>
 
                             <td><span class="d-flex gap-1">
-                                    <a class="btn-primary-sm">Lihat Detail
+                                    <a class="btn-primary-sm" href="/admin/detail-calonsiswa">Lihat Detail
                                     </a>
                                     <a class="btn-warning-sm">Ubah
                                     </a>

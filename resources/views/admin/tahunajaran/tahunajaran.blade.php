@@ -46,9 +46,8 @@
                                     <td><span class="d-flex gap-1">
                                             <a class="btn-primary-sm">Lihat Data Peserta
                                             </a>
-                                            <a class="btn-warning-sm">Ubah
+                                            <a class="btn-warning-sm">Lihat Soal
                                             </a>
-
                                             <a class="btn-danger-sm deletebutton">Hapus
                                             </a>
                                         </span>

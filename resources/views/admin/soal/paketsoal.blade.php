@@ -10,14 +10,14 @@
             <div class="menu d-flex justify-content-between ">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="me-5">
                     <ol class="breadcrumb mb-0 ">
-                        <li class="breadcrumb-item "><a href="#">Data clients</a></li>
+                        <li class="breadcrumb-item "><a href="#">Data soal</a></li>
                     </ol>
                 </nav>
 
                 <div class="d-flex align-items-center " style="color: gray">
                     <span class="material-symbols-outlined me-2 ">
                         error
-                    </span><span>Jika ada pertanyaan, silahkan hubungi admin</span>
+                    </span><span>Jika ada kendala, silahkan hubungi developer website</span>
                 </div>
             </div>
         </div>
@@ -27,33 +27,53 @@
                 <div class="menu-container">
                     <div class="menu overflow-hidden">
                         <div class="title-container">
-                            <p class="title">Data clients</p>
+                            <p class="title">Data soal</p>
                         </div>
-                        <table id="tableClients" class="table table-striped" style="width:100%">
+                        <table id="tablesoal" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Logo Clients</th>
-                                    <th>Nama clients</th>
+                                    <th>#</th>
+                                    <th>Cover Paket</th>
+                                    <th>Tahun Ajaran</th>
+                                    <th>Status Paket Soal</th>
+                                    <th>Waktu</th>
                                     <th>Action</th>
-                                    {{-- detail, ubah status pesanan --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>1</td>
                                     <td><img src="https://www.dreambox.id/wp-content/uploads/2022/06/15.jpg"
                                             style="height: 50px" />
                                     </td>
-                                    <td><span class="maxlines">Prabowo</span></td>
+                                    <td><span class="maxlines">2024/2025</span></td>
 
+                                    <td>Siap Dikerjakan</td>
+                                    <td>2 Jam 30 Menit</td>
 
                                     <td><span class="d-flex gap-1">
-                                            <a class="btn-primary-sm">Lihat
+                                            <a class="btn-primary-sm" href="/admin/soal">Lihat Soal
                                             </a>
                                             <a class="btn-warning-sm">Ubah
                                             </a>
 
+
                                             <a class="btn-danger-sm deletebutton">Hapus
                                             </a>
+
+                                            <div class="dropdown">
+                                                <a class="btn-status-sm dropdown-toggle" href="#" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Ubah Status Soal
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Menunggu Waktu</a></li>
+                                                    <li><a class="dropdown-item" href="#">Siap Dikerjakan</a></li>
+                                                    <li><a class="dropdown-item" href="#">Selesai</a></li>
+                                                </ul>
+                                            </div>
+
                                         </span>
                                     </td>
                                 </tr>
@@ -61,13 +81,17 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Logo Clients</th>
-                                    <th>Nama clients</th>
+                                    <th>#</th>
+                                    <th>Cover Paket</th>
+                                    <th>Tahun Ajaran</th>
+                                    <th>Status Paket Soal</th>
+                                    <th>Waktu</th>
                                     <th>Action</th>
-                                    {{-- detail, ubah status pesanan --}}
                                 </tr>
                             </tfoot>
                         </table>
+
+
                     </div>
                 </div>
             </div>
@@ -75,22 +99,41 @@
                 <div class="menu-container">
                     <div class="menu overflow-hidden">
                         <div class="title-container">
-                            <p class="title">Tambah clients</p>
+                            <p class="title">Tambah soal</p>
                         </div>
                         <input type="hidden" id="d-id" name="d-id">
 
                         <div class=" mb-3">
-                            <label class="form-label">Gambar Clients</label>
-
-                            <form action="/target" class="dropzone" id="p-icon"></form>
+                            <label class="form-label">Cover Paket Soal</label>
+                            <br>
+                            <input type="file" id="d-gambar" name="d-gambar" />
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-judulclients" name="p-judulclients"
-                                placeholder="Nama Clients">
-                            <label for="p-namaclient" class="form-label">Nama Clients</label>
+                            <textarea type="text" class="form-control" id="p-soal" name="p-soal" placeholder="soal"> </textarea>
+                            <label for="p-soal" class="form-label">Soal</label>
                         </div>
 
+
+                        <select class="form-select mb-3 " aria-label="Default select example">
+                            <option selected>Pilih Tahun Ajaran</option>
+                            <option value="1">2024/2025</option>
+                            <option value="2">2025/2026</option>
+                            <option value="3">2026/2027</option>
+                        </select>
+
+                        <label>Durasi Pengerjaan Soal</label>
+                        <div class="d-flex gap-3 ">
+                            <div class="form-floating mb-3">
+                                <textarea type="text" class="form-control" id="p-jam" name="p-jam" placeholder="jam"> </textarea>
+                                <label for="p-jam" class="form-label">Jam</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <textarea type="text" class="form-control" id="p-menit" name="p-menit" placeholder="menit"> </textarea>
+                                <label for="p-menit" class="form-label">Menit</label>
+                            </div>
+                        </div>
 
 
                         <button type="button" class="bt-primary m-2 ms-auto">Simpan Perubahan</button>
@@ -109,7 +152,7 @@
     <script>
         $(document).ready(function() {
 
-            var tableclients = $('#tableclients').DataTable({
+            var tablesoal = $('#tablesoal').DataTable({
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({

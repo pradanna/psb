@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('siswa.base')
 
 @section('morecss')
     {{-- DROPZONE --}}
@@ -94,7 +94,7 @@
 
 
 
-                        <button type="button" class="bt-primary m-2 ms-auto">Lihat Hasil Tes</button>
+                        <button type="button" class="bt-primary m-2 ms-auto">Cetak Formulir Pendaftaran</button>
 
                     </div>
                 </div>
