@@ -29,34 +29,36 @@
                         <div class="title-container">
                             <p class="title">Tambah tahun ajaran</p>
                         </div>
-                        <table id="tabletahun ajaran" class="table table-striped" style="width:100%">
+                        <table id="tabel" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nama Tahun Ajaran</th>
                                     <th>Action</th>
                                     {{-- detail, ubah status pesanan --}}
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+{{--                            <tbody>--}}
+{{--                                <tr>--}}
 
-                                    <td><span class="maxlines">2024/2025</span></td>
+{{--                                    <td><span class="maxlines">2024/2025</span></td>--}}
 
-                                    </td>
-                                    <td><span class="d-flex gap-1">
-                                            <a class="btn-primary-sm">Lihat Data Peserta
-                                            </a>
-                                            <a class="btn-warning-sm">Lihat Soal
-                                            </a>
-                                            <a class="btn-danger-sm deletebutton">Hapus
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
+{{--                                    </td>--}}
+{{--                                    <td><span class="d-flex gap-1">--}}
+{{--                                            <a class="btn-primary-sm">Lihat Data Peserta--}}
+{{--                                            </a>--}}
+{{--                                            <a class="btn-warning-sm">Lihat Soal--}}
+{{--                                            </a>--}}
+{{--                                            <a class="btn-danger-sm deletebutton">Hapus--}}
+{{--                                            </a>--}}
+{{--                                        </span>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
 
-                            </tbody>
+{{--                            </tbody>--}}
                             <tfoot>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nama Tahun Ajaran</th>
                                     <th>Action</th>
                                     {{-- detail, ubah status pesanan --}}
@@ -68,21 +70,22 @@
             </div>
             <div class="col-md-4">
                 <div class="menu-container">
-                    <div class="menu overflow-hidden">
+                    <form class="menu overflow-hidden" id="form" onsubmit="return confirmSaveData()">
+                        @csrf
                         <div class="title-container">
                             <p class="title">Data tahun ajaran</p>
                         </div>
-                        <input type="hidden" id="d-id" name="d-id">
+                        <input type="hidden" id="id" name="id">
 
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-nama" name="p-nama"
-                                placeholder="Nama tahun ajaran">
-                            <label for="p-nama" class="form-label">Nama Tahun Ajaran</label>
+                        <div class="form-group mb-3">
+                            <label for="nama" class="form-label">Nama Tahun Ajaran</label>
+                            <input type="text" class="form-control" required id="nama" name="nama" pattern="[0-9]{4}/[0-9]{4}"
+                                placeholder="2023/2024">
                         </div>
 
 
-                        <button type="button" class="bt-primary m-2 ms-auto">Simpan Perubahan</button>
-                    </div>
+                        <button type="submit" class="bt-primary m-2 ms-auto">Simpan Perubahan</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -93,51 +96,47 @@
 @endsection
 
 @section('morejs')
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
-        $(document).ready(function() {
-
-            var tabletahun ajaran = $('#tabletahun ajaran').DataTable({
-                responsive: {
-                    details: {
-                        display: DataTable.Responsive.display.modal({
-                            header: function(row) {
-                                var data = row.data();
-                                return 'Details for ' + data[0] + ' ' + data[1];
-                            }
-                        }),
-                        renderer: DataTable.Responsive.renderer.tableAll({
-                            tableClass: 'table'
-                        })
+        $(document).ready(function () {
+            showData()
+        })
+        function showData() {
+            let column = [
+                {
+                    className: "text-center",
+                    orderable: false,
+                    defaultContent: "",
+                    searchable: false
+                },
+                {
+                    data: 'nama', name: 'nama', className: "text-center",},
+                {
+                    className: "text-center",
+                    data:'id',
+                    name: 'action', orderable: false, searchable: false,
+                    render: function (data) {
+                      return '<span class="d-flex gap-1">'+
+                         ' <a class="btn-primary-sm">Lihat Data Peserta'+
+                        ' </a>'+
+                        ' <a class="btn-warning-sm">Lihat Soal'+
+                        ' </a>'+
+                        ' <a class="btn-danger-sm deletebutton">Hapus'+
+                        ' </a>'+
+                          ' </span>';
                     }
-                }
-            });
+                },
+            ]
+            datatable('tabel','{{route('admin.tahunajaran.datatable')}}',column)
+        }
 
-            $(".deletebutton").click(function() {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
+        function confirmSaveData(){
+            saveData('Simpan tahun ajaran','form','{{route('admin.tahunajaran')}}', afterSave)
+            return false;
+        }
 
-            // Note that the name "myDropzone" is the camelized
-            // id of the form.
-            Dropzone.options.myDropzone = {
-                // Configuration options go here
-            };
-        });
+        function afterSave() {
+            $('#nama').val('')
+            $('#tabel').DataTable().ajax.reload();
+        }
     </script>
 @endsection
