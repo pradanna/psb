@@ -30,7 +30,6 @@
 
     {{-- DATA TABLES --}}
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
-    <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" />
 
 
     {{-- ICON --}}
@@ -66,10 +65,16 @@
                 </div>
 
                 <div class="mt-5">
-                    <p class="mb-0 fw-bold ">Keterangan:</p>
-                    <p class="mb-0 small">Belum Dikerjakan</p>
-                    <p class="mb-0 small"> Sudah Dikerjakan</p>
-                    <p class="mb-0 small">Indikator nomor</p>
+                    <p class="mb-0 fw-bold ">Keterangan warna:</p>
+                    <p class="mb-0 fs-06 d-flex align-items-md-center gap-3 mb-1 "> <a class="nomorsoal">0</a> Belum
+                        Dikerjakan
+                    </p>
+                    <p class="mb-0 fs-06 d-flex align-items-md-center gap-3  mb-1  "><a class="nomorsoal terisi">0</a>
+                        Sudah
+                        Dikerjakan</p>
+                    <p class="mb-0 fs-06 d-flex align-items-md-center  gap-3 "><a
+                            class="nomorsoal active">0</a>Indikator
+                        nomor</p>
                 </div>
 
                 <div class="footer">
@@ -142,8 +147,6 @@
 
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
         <script src="{{ asset('js/admin-genosstyle.js') }}"></script>
 
         @yield('morejs')

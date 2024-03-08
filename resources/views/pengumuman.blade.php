@@ -6,7 +6,6 @@
 
     {{-- DATA TABLES --}}
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
-    <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" />
 @endsection
 @section('content')
     <div class="g-hero">
