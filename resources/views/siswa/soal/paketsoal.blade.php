@@ -50,7 +50,7 @@
                         <p class="mb-0 ">Tersedia 50 Soal dengan pilihan ganda</p>
                         <p class="mb-5 ">Pilih jawaban dengan benar, skor akan muncul setelah siswa mengerjakan</p>
 
-                        <button type="button" class="bt-primary  me-auto">Mulai Mengerjakan</button>
+                        <a href="/siswa/kerjakansoal" class="bt-primary  me-auto d-inline ">Mulai Mengerjakan</a>
                     </div>
                 </div>
             </div>

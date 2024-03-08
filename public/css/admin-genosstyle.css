@@ -463,7 +463,7 @@ body {
   flex-wrap: wrap;
   gap: 5px;
 }
-.admin .nomorsoal-wrapper .nomorsoal {
+.admin .nomorsoal {
   all: unset;
   cursor: pointer;
   width: 30px;
@@ -477,14 +477,17 @@ body {
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   transition: all 300ms ease-in-out;
 }
-.admin .nomorsoal-wrapper .nomorsoal.terisi {
+.admin .nomorsoal.terisi {
   background-color: rgb(255, 200, 136) !important;
 }
-.admin .nomorsoal-wrapper .nomorsoal.active {
+.admin .nomorsoal.active {
   background-color: rgb(136, 201, 255) !important;
 }
-.admin .nomorsoal-wrapper .nomorsoal:hover {
+.admin .nomorsoal:hover {
   background-color: #eee;
+}
+.admin .fs-06 {
+  font-size: 0.6rem;
 }
 .admin .gbr-info {
   width: 100%;
