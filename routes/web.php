@@ -43,17 +43,15 @@ Route::prefix('admin')->group(function () {
     Route::prefix('tahunajaran')->group(function () {
         Route::get('datatable', [\App\Http\Controllers\Admin\TahunAjaranController::class, 'datables'])->name('admin.tahunajaran.datatable');
         Route::match(['POST', 'GET'], '', [\App\Http\Controllers\Admin\TahunAjaranController::class, 'index'])->name('admin.tahunajaran');
+        Route::post('delete', [\App\Http\Controllers\Admin\TahunAjaranController::class, 'delete'])->name('admin.tahunajaran.delete');
     });
 
     Route::prefix('calonsiswa')->group(function () {
         Route::get('datatable', [\App\Http\Controllers\Admin\CalonSiswaController::class, 'datatable'])->name('admin.calonsiswa.datatable');
         Route::get('', [\App\Http\Controllers\Admin\CalonSiswaController::class, 'index'])->name('admin.calonsiswa');
-
-        Route::get('tambah-calonsiswa', function () {
-            return view('admin.calonsiswa.tambah_calonsiswa');
-        });
-
+        Route::match(['GET','POST'],'data-calonsiswa/{siswa}',[\App\Http\Controllers\Admin\CalonSiswaController::class,'dataCalonSiswa'])->name('admin.calonsiswa.data');
         Route::get('detail-calonsiswa/{siswa}', [\App\Http\Controllers\Admin\CalonSiswaController::class, 'detail'])->name('admin.calonsiswa.detail');
+        Route::post('detail-calonsiswa/{siswa}/status-pendaftaran', [\App\Http\Controllers\Admin\CalonSiswaController::class, 'confirmRegistration'])->name('admin.calonsiswa.detail.status');
     });
 
     Route::prefix('informasi')->group(function () {
@@ -64,6 +62,7 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('paketsoal')->group(function () {
         Route::get('datatable', [\App\Http\Controllers\Admin\PaketSoalController::class, 'datatable'])->name('admin.paketsoal.datatable');
+        Route::post('delete', [\App\Http\Controllers\Admin\PaketSoalController::class, 'delete'])->name('admin.paketsoal.delete');
         Route::match(['POST', 'GET'], '', [\App\Http\Controllers\Admin\PaketSoalController::class, 'index'])->name('admin.paketsoal');
         Route::post('ganti-status/{id}', [\App\Http\Controllers\Admin\PaketSoalController::class,'gantiStatus'])->name('admin.paketsoal.status');
         Route::prefix('soal')->group(function () {

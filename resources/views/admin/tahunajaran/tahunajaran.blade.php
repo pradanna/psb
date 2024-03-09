@@ -114,13 +114,13 @@
                     className: "text-center",
                     data:'id',
                     name: 'action', orderable: false, searchable: false,
-                    render: function (data) {
+                    render: function (data,x, row) {
                       return '<span class="d-flex gap-1">'+
-                         ' <a class="btn-primary-sm">Lihat Data Peserta'+
+                         ' <a class="btn-primary-sm"  href="/admin/calonsiswa?t='+row.nama+'">Lihat Data Peserta'+
                         ' </a>'+
-                        ' <a class="btn-warning-sm">Lihat Soal'+
+                        ' <a class="btn-warning-sm"  href="/admin/paketsoal?t='+row.nama+'">Lihat Soal'+
                         ' </a>'+
-                        ' <a class="btn-danger-sm deletebutton">Hapus'+
+                        ' <a class="btn-danger-sm" id="deleteData" data-id="'+data+'" data-nama="'+row.nama+'">Hapus'+
                         ' </a>'+
                           ' </span>';
                     }
@@ -138,5 +138,14 @@
             $('#nama').val('')
             $('#tabel').DataTable().ajax.reload();
         }
+
+        $(document).on('click', '#deleteData', function () {
+            let form = {
+                '_token': '{{csrf_token()}}',
+                'id': $(this).data('id')
+            }
+            deleteData('soal ' + $(this).data('name'), '{{route('admin.tahunajaran.delete')}}',form, afterSave)
+            return false
+        })
     </script>
 @endsection

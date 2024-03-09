@@ -44,7 +44,15 @@ class TahunAjaranController extends Controller
     }
 
     public function delete(){
+        $data = TahunAjaran::find(request('id'));
+        $data->delete();
 
+        return response()->json(
+            [
+                'msg' => 'berhasil',
+            ],
+            200
+        );
     }
 
 }

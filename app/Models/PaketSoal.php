@@ -22,4 +22,8 @@ class PaketSoal extends Model
     public function tahun_ajaran(){
         return $this->belongsTo(TahunAjaran::class,'tahun_ajaran_id');
     }
+
+    public function soal(){
+        return $this->hasMany(Soal::class, 'paket_soal_id');
+    }
 }
