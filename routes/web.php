@@ -101,3 +101,6 @@ Route::get('/siswa/paketsoal', function () {
 Route::get('/siswa/kerjakansoal', function () {
     return view('siswa.soal.kerjakansoal');
 });
+
+
+Route::get('/siswa/cetakformulir', [\App\Http\Controllers\CetakFormulirController::class, 'index']);
