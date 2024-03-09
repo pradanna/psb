@@ -49,66 +49,109 @@
 
                         <input type="hidden" id="d-id" name="d-id">
 
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-namacalonsiswa" name="nama" required value="{{old('nama')}}"
-                                placeholder="Nama Calon Siswa">
-                            <label for="p-namacalonsiswa" class="form-label">Nama Calon Siswa</label>
+                        <div class="mb-3">
+                            <div class="form-floating ">
+                                <input type="text" class="form-control" id="p-namacalonsiswa" name="nama" required value="{{old('nama')}}"
+                                       placeholder="Nama Calon Siswa">
+                                <label for="p-namacalonsiswa" class="form-label">Nama Calon Siswa</label>
+                            </div>
+                            @if ($errors->has('nama'))
+                                <p class="text-danger" style="font-size: 0.8em">
+                                    {{ $errors->first('nama')}}
+                                </p>
+                            @endif
                         </div>
 
                         <div class="row">
-                            <div class="col-6">
-                                <div class="form-floating mb-3">
+                            <div class="col-6 mb-3">
+                                <div class="form-floating ">
                                     <input type="text" class="form-control" id="p-tempatlahir" name="tempat_lahir" required value="{{old('tempat_lahir')}}"
                                         placeholder="Tempat Lahir">
                                     <label for="p-tempatlahir" class="form-label">Tempat Lahir</label>
                                 </div>
+                                @if ($errors->has('tempat_lahir'))
+                                    <p class="text-danger" style="font-size: 0.8em">
+                                        {{ $errors->first('tempat_lahir')}}
+                                    </p>
+                                @endif
                             </div>
-                            <div class="col-6">
-                                <div class="mb-3">
+                            <div class="col-6 mb-3">
+                                <div class="">
                                     <label for="p-tanggallahir" class="form-label">Tanggal Lahir</label>
 
                                     <input type="text" class="form-control" id="p-tanggallahir" required value="{{old('tanggal_lahir')}}"
                                         name="tanggal_lahir" />
                                 </div>
+                                @if ($errors->has('tanggal_lahir'))
+                                    <p class="text-danger" style="font-size: 0.8em">
+                                        {{ $errors->first('tanggal_lahir')}}
+                                    </p>
+                                @endif
                             </div>
 
                         </div>
 
                         <label>Jenis Kelamin</label>
-                        <div class="d-flex gap-3 mb-3 ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="Laki - Laki" id="p-laki">
-                                <label class="form-check-label" for="p-laki">
-                                    Laki-laki
-                                </label>
+                        <div class="mb-3">
+                            <div class="d-flex gap-3  ">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" value="Laki - Laki" id="p-laki">
+                                    <label class="form-check-label" for="p-laki">
+                                        Laki-laki
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="p-perempuan"
+                                           checked>
+                                    <label class="form-check-label" for="p-perempuan">
+                                        Perempuan
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="p-perempuan"
-                                    checked>
-                                <label class="form-check-label" for="p-perempuan">
-                                    Perempuan
-                                </label>
+                            @if ($errors->has('jenis_kelamin'))
+                                <p class="text-danger" style="font-size: 0.8em">
+                                    {{ $errors->first('jenis_kelamin')}}
+                                </p>
+                            @endif
+                        </div>
+
+                       <div class=" mb-3">
+                           <div class="form-floating">
+                               <input type="text" class="form-control" id="p-alamat" name="alamat" required value="{{old('alamat')}}"
+                                      placeholder="Judul Calon Siswa">
+                               <label for="p-alamat" class="form-label">Alamat</label>
+                           </div>
+                           @if ($errors->has('alamat'))
+                               <p class="text-danger" style="font-size: 0.8em">
+                                   {{ $errors->first('alamat')}}
+                               </p>
+                           @endif
+                       </div>
+
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="p-asalsekolah" name="asal_sekolah" required value="{{old('asal_sekolah')}}"
+                                       placeholder="Asal Sekolah">
+                                <label for="p-asalsekolah" class="form-label">Asal Sekolah</label>
                             </div>
+                            @if ($errors->has('asal_sekolah'))
+                                <p class="text-danger" style="font-size: 0.8em">
+                                    {{ $errors->first('asal_sekolah')}}
+                                </p>
+                            @endif
                         </div>
 
-
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-alamat" name="alamat" required value="{{old('alamat')}}"
-                                placeholder="Judul Calon Siswa">
-                            <label for="p-alamat" class="form-label">Alamat</label>
-                        </div>
-
-
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-asalsekolah" name="asal_sekolah" required value="{{old('asal_sekolah')}}"
-                                placeholder="Asal Sekolah">
-                            <label for="p-asalsekolah" class="form-label">Asal Sekolah</label>
-                        </div>
-
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-nohp" name="no_hp" required value="{{old('no_hp')}}"
-                                placeholder="Nomor HP">
-                            <label for="p-nohp" class="form-label">No HP</label>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="p-nohp" name="no_hp" required value="{{old('no_hp')}}"
+                                       placeholder="Nomor HP">
+                                <label for="p-nohp" class="form-label">No HP</label>
+                            </div>
+                            @if ($errors->has('asal_sekolah'))
+                                <p class="text-danger" style="font-size: 0.8em">
+                                    {{ $errors->first('asal_sekolah')}}
+                                </p>
+                            @endif
                         </div>
 
 
@@ -136,19 +179,29 @@
                         <hr>
                         Masukan Username dan Password untuk login
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-floating mb-3">
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
                                     <input type="text" class="form-control" id="p-username" name="username" value="{{old('username')}}" required
                                         placeholder="Username">
                                     <label for="p-username" class="form-label">Username</label>
                                 </div>
+                                @if ($errors->has('username'))
+                                    <p class="text-danger" style="font-size: 0.8em">
+                                        {{ $errors->first('username')}}
+                                    </p>
+                                @endif
                             </div>
-                            <div class="col-4">
-                                <div class="form-floating mb-3">
+                            <div class="col-4 mb-3">
+                                <div class="form-floating ">
                                     <input type="text" class="form-control" id="p-password" name="password" required
                                         placeholder="Password">
                                     <label for="p-password" class="form-label">Password</label>
                                 </div>
+                                @if ($errors->has('password'))
+                                    <p class="text-danger" style="font-size: 0.8em">
+                                        {{ $errors->first('password')}}
+                                    </p>
+                                @endif
                             </div>
                             <div class="col-4">
                                 <div class="form-floating mb-3">

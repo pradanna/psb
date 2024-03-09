@@ -39,6 +39,7 @@
                                 <th>Pilihan 2</th>
                                 <th>Pilihan 3</th>
                                 <th>Pilihan 4</th>
+                                <th>Jawaban</th>
                                 <th style="width: 50px">Action</th>
                             </tr>
                             </thead>
@@ -80,6 +81,7 @@
                                 <th>Pilihan 2</th>
                                 <th>Pilihan 3</th>
                                 <th>Pilihan 4</th>
+                                <th>Jawaban</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
@@ -195,6 +197,12 @@
                     data: 'pilihan_3', name: 'pilihan_3',
                 }, {
                     data: 'pilihan_4', name: 'pilihan_4',
+                },
+                {
+                    data: 'jawaban_benar', name: 'jawaban_benar',
+                    render:function (data) {
+                        return 'Pilihan '+data
+                    },
                 },
                 {
                     className: "text-center",

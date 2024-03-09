@@ -26,7 +26,7 @@
                 <div class="menu-container">
                     <div class="menu overflow-hidden">
                         <div class="title-container">
-                            <p class="title">Data soal</p>
+                            <p class="title">Data soal {{request('t') ? 'Tahun Ajaran '.request('t') : ''}}</p>
                         </div>
                         <div class="table-responsive">
                             <table id="tabel" class="table table-striped" style="width:100%">
@@ -127,18 +127,18 @@
                             @endforeach
                         </select>
 
-                            <div class="form-group mb-3">
-                                <label for="durasi" class="form-label">Durasi (Menit)</label>
-                                <input type="text" class="form-control" id="durasi" name="durasi" placeholder="60"/>
-                            </div>
+                        <div class="form-group mb-3">
+                            <label for="durasi" class="form-label">Durasi (Menit)</label>
+                            <input type="text" class="form-control" id="durasi" name="durasi" placeholder="60"/>
+                        </div>
 
                         <div class="form-group mb-3">
                             <label for="waktu_pengerjaan" class="form-label">Waktu Pengerjaan</label>
                             <input type="datetime-local" class="form-control" id="waktu_pengerjaan" name="waktu_pengerjaan" placeholder="60"/>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="bt-warning " onclick="resetForm()">Clear</button>
-                        <button type="submit" class="bt-primary">Simpan Perubahan</button>
+                            <button type="button" class="bt-warning " onclick="resetForm()">Clear</button>
+                            <button type="submit" class="bt-primary">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>
@@ -191,17 +191,20 @@
                 },
                 {
                     data: 'durasi', name: 'durasi',
+                    render: function (data) {
+                        return data+' menit'
+                    },
                 },
                 {
                     className: "text-center",
                     data: 'id', name: 'id', orderable: false, searchable: false,
-                    render: function (data,x,row) {
+                    render: function (data, x, row) {
                         return '<span class="d-flex gap-1">' +
-                            '<a class="btn-primary-sm" href="/admin/paketsoal/soal/'+row.url+'">Lihat Soal' +
+                            '<a class="btn-primary-sm" href="/admin/paketsoal/soal/' + row.url + '">Lihat Soal' +
                             '</a>' +
-                            '<a class="btn-warning-sm" id="editData" data-id="'+data+'" data-start="'+row.waktu_pengerjaan+'" data-gambar="'+row.gambar+'" data-nama="'+row.nama+'" data-durasi="'+row.durasi+'" data-ajaran="'+row.tahun_ajaran_id+'">Ubah' +
+                            '<a class="btn-warning-sm" id="editData" data-id="' + data + '" data-start="' + row.waktu_pengerjaan + '" data-gambar="' + row.gambar + '" data-nama="' + row.nama + '" data-durasi="' + row.durasi + '" data-ajaran="' + row.tahun_ajaran_id + '">Ubah' +
                             '</a>' +
-                            ' <a class="btn-danger-sm deletebutton">Hapus' +
+                            ' <a class="btn-danger-sm deletebutton" id="deleteData" data-id="'+data+'" data-nama="'+row.nama+'">Hapus' +
                             '</a>' +
                             '<div class="dropdown">' +
                             '<a class="btn-status-sm dropdown-toggle" href="#" role="button"' +
@@ -209,20 +212,25 @@
                             '        Ubah Status Soal' +
                             '    </a>' +
                             '    <ul class="dropdown-menu">' +
-                            '        <li><a class="dropdown-item gantiStatus" data-id="'+data+'" data-stat="menunggu" href="#">Menunggu Waktu</a></li>' +
-                            '       <li><a class="dropdown-item gantiStatus" data-id="'+data+'" data-stat="siap" href="#">Siap Dikerjakan</a></li>' +
-                            '        <li><a class="dropdown-item gantiStatus" data-id="'+data+'" data-stat="selesai" href="#">Selesai</a></li>' +
+                            '        <li><a class="dropdown-item gantiStatus" data-id="' + data + '" data-stat="menunggu" href="#">Menunggu Waktu</a></li>' +
+                            '       <li><a class="dropdown-item gantiStatus" data-id="' + data + '" data-stat="siap" href="#">Siap Dikerjakan</a></li>' +
+                            '        <li><a class="dropdown-item gantiStatus" data-id="' + data + '" data-stat="selesai" href="#">Selesai</a></li>' +
                             '    </ul>' +
                             ' </div>' +
                             '</span>';
                     }
                 },
             ];
-            datatable('tabel', '{{route('admin.paketsoal.datatable')}}', colums)
+
+            let url = '{{route('admin.paketsoal.datatable')}}';
+            @if(request('t'))
+                url = url + '?t={{request('t')}}'
+            @endif
+            datatable('tabel', url, colums)
         }
 
         function confirmSave() {
-            saveData('Simpan Informasi','form','{{route('admin.paketsoal')}}', afterSave)
+            saveData('Simpan Informasi', 'form', '{{route('admin.paketsoal')}}', afterSave)
             return false
         }
 
@@ -230,8 +238,7 @@
             $('#tabel').DataTable().ajax.reload();
         }
 
-
-        $(document).on('click','#editData', function () {
+        $(document).on('click', '#editData', function () {
             let id = $(this).data('id')
             let start = $(this).data('start')
             let waktu_pengerjaan = $(this).data('start')
@@ -243,25 +250,34 @@
             $('#id').val(id)
             $('#durasi').val(durasi)
             $('#ajaranSelect').val(ajaran)
-            console.log('waktu_pengerjaan',waktu_pengerjaan)
+            console.log('waktu_pengerjaan', waktu_pengerjaan)
             $('#waktu_pengerjaan').val(waktu_pengerjaan)
             setImgDropify('image1', null, image);
         })
 
-        $(document).on('click','.gantiStatus', function () {
+        $(document).on('click', '.gantiStatus', function () {
             let status = $(this).data('stat')
             let id = $(this).data('id')
             let url = '{{route('admin.paketsoal.status',['id' => 'valllll'])}}'
-            url = url.replace('valllll',id)
+            url = url.replace('valllll', id)
             let form = {
                 '_token': '{{csrf_token()}}',
                 'status': status
             }
-            $.post(url,form, function (res,x,r) {
-                if (r.status == 200){
+            $.post(url, form, function (res, x, r) {
+                if (r.status == 200) {
                     afterSave()
                 }
             })
+        })
+
+        $(document).on('click', '#deleteData', function () {
+            let form = {
+                '_token': '{{csrf_token()}}',
+                'id': $(this).data('id')
+            }
+            deleteData('paket soal ' + $(this).data('nama')+', menghapus paket soal akah menghapus seluruh soal yang ada di dalam paket soal', '{{route('admin.paketsoal.delete')}}',form, afterSave)
+            return false
         })
     </script>
 @endsection

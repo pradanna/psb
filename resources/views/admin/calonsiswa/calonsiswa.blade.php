@@ -21,8 +21,8 @@
         <div class="menu-container">
             <div class="menu overflow-hidden">
                 <div class="title-container">
-                    <p class="title">Data Calon Siswa</p>
-                    <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Tambah Calon Siswa</a>
+                    <p class="title">Data Calon Siswa {{request('t') ? 'Tahun Ajaran '.request('t') : ''}}</p>
+{{--                    <a class="btn-primary-sm" href="/admin/calonsiswa/tambah-calonsiswa">Tambah Calon Siswa</a>--}}
                 </div>
                 <table id="tabel" class="table table-striped" style="width:100%">
                     <thead>
@@ -32,6 +32,7 @@
                         <th>TTL</th>
                         <th>Jenis Kelamin</th>
                         <th>Nomor HP</th>
+                        <th>Tahun Ajaran</th>
                         <th>Action</th>
                         {{-- detail, ubah status pesanan --}}
                     </tr>
@@ -65,6 +66,7 @@
                         <th>TTL</th>
                         <th>Jenis Kelamin</th>
                         <th>Nomor HP</th>
+                        <th>Tahun Ajaran</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>
@@ -92,6 +94,7 @@
                 {data: 'tempat_lahir', name: 'tempat_lahir', className: "text-center",},
                 {data: 'jenis_kelamin', name: 'jenis_kelamin', className: "text-center",},
                 {data: 'no_hp', name: 'no_hp', className: "text-center",},
+                {data: 'tahun_ajaran.nama', name: 'tahun_ajaran.nama', className: "text-center",},
                 {
                     className: "text-center",
                     data: 'id',
@@ -100,7 +103,7 @@
                         return '<span class="d-flex gap-1">' +
                             '  <a class="btn-primary-sm" href="/admin/calonsiswa/detail-calonsiswa/'+data+'">Lihat Detail' +
                             '  </a>' +
-                            '  <a class="btn-warning-sm">Ubah' +
+                            '  <a class="btn-warning-sm" href="/admin/calonsiswa/data-calonsiswa/'+data+'">Ubah' +
                             '  </a>' +
                             '  <a class="btn-danger-sm deletebutton">Hapus' +
                             '  </a>' +
@@ -108,7 +111,11 @@
                     }
                 },
             ]
-            datatable('tabel', '{{route('admin.calonsiswa.datatable')}}', column)
+            let url = '{{route('admin.calonsiswa.datatable')}}'
+            @if(request('t'))
+                url = url+'?t={{request('t')}}'
+            @endif
+            datatable('tabel', url, column)
         }
     </script>
 @endsection

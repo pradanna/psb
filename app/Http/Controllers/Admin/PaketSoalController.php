@@ -14,6 +14,15 @@ class PaketSoalController extends CustomController
     {
         $data = PaketSoal::with('tahun_ajaran');
 
+        if (request('t')){
+            $tahun = TahunAjaran::where('nama',request('t'))->first();
+            $param = null;
+            if ($tahun){
+                $param = $tahun->id;
+            }
+            $data = $data->where('tahun_ajaran_id',$param );
+        }
+
         return DataTables::of($data)
                          ->make();
     }
@@ -84,6 +93,34 @@ class PaketSoalController extends CustomController
             200
         );
 
+    }
+
+    public function delete(){
+        $data = PaketSoal::find(request('id'));
+
+        foreach ($data->soal as $d){
+            if ($d->gambar_soal) {
+                if (file_exists('../public'.$d->gambar_soal)) {
+                    unlink('../public'.$d->gambar_soal);
+                }
+            }
+            $d->delete();
+        }
+
+        if ($data->gambar) {
+            if (file_exists('../public'.$data->gambar)) {
+                unlink('../public'.$data->gambar);
+            }
+        }
+
+        $data->delete();
+
+        return response()->json(
+            [
+                'msg' => 'berhasil',
+            ],
+            200
+        );
     }
 
 }

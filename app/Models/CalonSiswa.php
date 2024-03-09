@@ -27,4 +27,8 @@ class CalonSiswa extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function tahun_ajaran(){
+        return $this->belongsTo(TahunAjaran::class,'tahun_ajaran_id');
+    }
 }
