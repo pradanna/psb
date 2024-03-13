@@ -169,7 +169,7 @@
                                 <p class="user">User</p>
                                 <p class="email">user@gmail.com</p>
                                 <hr>
-                                <a class="logout" href="">Logout</a>
+                                <a class="logout" href="/logout">Logout</a>
                             </div>
                         </div>
                     </div>
