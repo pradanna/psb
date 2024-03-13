@@ -318,7 +318,7 @@ function currency(field) {
     });
 }
 
-function setImgDropify(img,text ='Masukkan Image Item',   file = null, height = 400) {
+function setImgDropify(img,text ='Masukkan Image',   file = null, height = 300) {
     img = $('#' + img).dropify({
         messages: {
             'default': text,
@@ -336,6 +336,6 @@ function setImgDropify(img,text ='Masukkan Image Item',   file = null, height = 
         img.destroy();
         img.init();
     }
-    $('.dropify-wrapper').height(height).width(300);
+    $('.dropify-wrapper').height(height);
 
 }

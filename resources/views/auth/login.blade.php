@@ -45,11 +45,21 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control login" id="username" name="username">
+                                <input type="text" class="form-control login" id="username" name="username" value="{{old('username')}}">
+                                @if ($errors->has('username'))
+                                    <p class="text-danger" style="font-size: 0.8em">
+                                        {{ $errors->first('username')}}
+                                    </p>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control login" id="password" name="password">
+                                @if ($errors->has('password'))
+                                    <p class="text-danger" style="font-size: 0.8em">
+                                        {{ $errors->first('password')}}
+                                    </p>
+                                @endif
                             </div>
                             <button class="btn-login   mt-4 d-block mb-3 w-100 " type="submit">LOGIN
                             </button>
