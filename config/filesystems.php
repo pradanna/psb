@@ -56,6 +56,34 @@ return [
             'throw' => false,
         ],
 
+        'informasiImage' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/informasi',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'paketSoalImage' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/paket-soal',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'soalImage' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/soal',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'siswaImage' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/calon-siswa',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

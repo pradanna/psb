@@ -2,7 +2,6 @@
 
 @section('morecss')
     {{-- DROPZONE --}}
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection
@@ -28,26 +27,25 @@
         </div>
 
         <div class="menu-container">
-            <div class="menu">
+            <form id="form" class="menu" onsubmit="return confirmSave()" enctype="multipart/form-data">
+                @csrf
                 <div class="title-container">
                     <p class="title">Tambah Calon Siswa</p>
                 </div>
 
-
-
                 <input type="hidden" id="d-id" name="d-id">
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="p-namacalonsiswa" name="p-namacalonsiswa"
-                        placeholder="Nama Calon Siswa">
+                    <input type="text" class="form-control" id="p-namacalonsiswa" name="nama" required value="{{$data->user->nama}}"
+                           placeholder="Nama Calon Siswa">
                     <label for="p-namacalonsiswa" class="form-label">Nama Calon Siswa</label>
                 </div>
 
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-tempatlahir" name="p-tempatlahir"
-                                placeholder="Tempat Lahir">
+                            <input type="text" class="form-control" id="p-tempatlahir" name="tempat_lahir" required value="{{$data->tempat_lahir}}"
+                                   placeholder="Tempat Lahir">
                             <label for="p-tempatlahir" class="form-label">Tempat Lahir</label>
                         </div>
                     </div>
@@ -55,7 +53,8 @@
                         <div class="mb-3">
                             <label for="p-tanggallahir" class="form-label">Tanggal Lahir</label>
 
-                            <input type="text" class="form-control" id="p-tanggallahir" name="p-tanggallahir" />
+                            <input type="text" class="form-control" id="p-tanggallahir" required value="{{$data->tanggal_lahir}}"
+                                   name="tanggal_lahir" />
                         </div>
                     </div>
 
@@ -64,13 +63,14 @@
                 <label>Jenis Kelamin</label>
                 <div class="d-flex gap-3 mb-3 ">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="p-laki">
+                        <input class="form-check-input" {{$data->jenis_kelamin == 'Laki - Laki' ? 'checked' : ''}} type="radio" name="jenis_kelamin" value="Laki - Laki" id="p-laki">
                         <label class="form-check-label" for="p-laki">
                             Laki-laki
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="p-perempuan" checked>
+                        <input class="form-check-input" {{$data->jenis_kelamin == 'Perempuan' ? 'checked' : ''}} type="radio" name="jenis_kelamin" value="Perempuan" id="p-perempuan"
+                               >
                         <label class="form-check-label" for="p-perempuan">
                             Perempuan
                         </label>
@@ -79,20 +79,21 @@
 
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="p-alamat" name="p-alamat"
-                        placeholder="Judul Calon Siswa">
+                    <input type="text" class="form-control" id="p-alamat" name="alamat" required value="{{$data->alamat}}"
+                           placeholder="Judul Calon Siswa">
                     <label for="p-alamat" class="form-label">Alamat</label>
                 </div>
 
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="p-asalsekolah" name="p-asalsekolah"
-                        placeholder="Asal Sekolah">
+                    <input type="text" class="form-control" id="p-asalsekolah" name="asal_sekolah" required value="{{$data->asal_sekolah}}"
+                           placeholder="Asal Sekolah">
                     <label for="p-asalsekolah" class="form-label">Asal Sekolah</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="p-nohp" name="p-nohp" placeholder="Nomor HP">
+                    <input type="text" class="form-control" id="p-nohp" name="no_hp" required value="{{$data->no_hp}}"
+                           placeholder="Nomor HP">
                     <label for="p-nohp" class="form-label">No HP</label>
                 </div>
 
@@ -102,15 +103,18 @@
                     <div class="col-6">
                         <div class=" mb-3">
                             <label class="form-label">Foto</label>
+                            <br>
 
-                            <form action="/target" class="dropzone" id="p-foto"></form>
+                            <input type="file" id="foto" name="url_foto" class="image"
+                                   data-min-height="10" data-heigh="300" accept="image/*"/>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class=" mb-3">
                             <label class="form-label">Ijazah / Akta SD</label>
-
-                            <form action="/target" class="dropzone" id="p-ijazah"></form>
+                            <br>
+                            <input type="file" id="ijazah" name="url_ijazah" class="image"
+                                   data-min-height="10" data-heigh="300" accept="image/*"/>
                         </div>
                     </div>
                 </div>
@@ -120,45 +124,56 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-username" name="p-username"
-                                placeholder="Username">
+                            <input type="text" class="form-control" id="p-username" name="username" value="{{$data->user->username}}" required
+                                   placeholder="Username">
                             <label for="p-username" class="form-label">Username</label>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-password" name="p-password"
-                                placeholder="Password">
+                            <input type="text" class="form-control" id="p-password" name="password"
+                                   placeholder="Password">
                             <label for="p-password" class="form-label">Password</label>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="p-konfirmpassword" name="p-konfirmpassword"
-                                placeholder="Konfirmasi Password">
+                            <input type="text" class="form-control" id="p-konfirmpassword"
+                                   name="password_confirmation" placeholder="Konfirmasi Password">
                             <label for="p-konfirmpassword" class="form-label">Konfirmasi Password</label>
                         </div>
                     </div>
                 </div>
 
-                <button type="button" class="bt-primary m-2 ms-auto">Simpan Perubahan</button>
+                <button type="submit" class="bt-primary m-2 ms-auto">Simpan</button>
 
-            </div>
+            </form>
         </div>
     </div>
 @endsection
 
 @section('morejs')
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <!-- Scripts -->
 
 
     <script>
-        // Note that the name "myDropzone" is the camelized
-        // id of the form.
-        Dropzone.options.myDropzone = {
-            // Configuration options go here
-        };
+        $(document).ready(function () {
+            setImgDropify('ijazah', "Masukkan foto ijazah");
+            setImgDropify('foto', "Masukkan foto");
+            @if($data)
+            setImgDropify('ijazah', "Masukkan foto ijazah",'{{$data->url_ijazah}}');
+            setImgDropify('foto', "Masukkan foto",'{{$data->url_foto}}');
+            @endif
+        });
+
+        function confirmSave() {
+            saveData('Simpan data calon siswa', 'form', '{{route('admin.calonsiswa.data',['siswa' => request('siswa')])}}', afterSave)
+            return false;
+        }
+
+        function afterSave() {
+
+        }
     </script>
     <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
     <script>
