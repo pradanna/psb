@@ -9,7 +9,7 @@ class Soal extends Model
 {
     use HasFactory;
 
-    protected $fillable =  [
+    protected $fillable = [
         'paket_soal_id',
         'gambar_soal',
         'soal',
@@ -19,4 +19,9 @@ class Soal extends Model
         'pilihan_4',
         'jawaban_benar'
     ];
+
+    public function paket()
+    {
+        return $this->belongsTo(PaketSoal::class, 'paket_soal_id');
+    }
 }

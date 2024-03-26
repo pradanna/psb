@@ -60,8 +60,8 @@
 
                 <ul>
                     <li>
-                        <a class=" menu {{ Request::is('siswa/dashboard') ? 'active' : '' }} tooltip"
-                            href="/siswa/dashboard"><span class="material-symbols-outlined">
+                        <a class=" menu {{ request()->is('siswa') ? 'active' : '' }} tooltip"
+                            href="{{ route('siswa.dashboard') }}"><span class="material-symbols-outlined">
                                 dashboard
                             </span>
                             <span class="text-menu"> Beranda</span>
@@ -70,8 +70,8 @@
                     </li>
 
                     <li>
-                        <a class="menu tooltip {{ Request::is('siswa/detail-calonsiswa') ? 'active' : '' }}"
-                            href="/siswa/detail-calonsiswa"><span class="material-symbols-outlined">
+                        <a class="menu tooltip {{ request()->is('siswa/profil') ? 'active' : '' }}"
+                            href="{{ route('siswa.profil') }}"><span class="material-symbols-outlined">
                                 account_circle
                             </span>
                             <span class="text-menu"> Profile</span>
@@ -81,8 +81,8 @@
 
 
                     <li>
-                        <a class="menu tooltip {{ Request::is('siswa/paketsoal') ? 'active' : '' }}"
-                            href="/siswa/paketsoal">
+                        <a class="menu tooltip {{ request()->is('siswa/soal') ? 'active' : '' }}"
+                            href="{{ route('siswa.soal') }}">
 
                             <span class="material-symbols-outlined">
                                 home_repair_service

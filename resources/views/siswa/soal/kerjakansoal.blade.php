@@ -2,7 +2,7 @@
 
 @section('morecss')
     {{-- DROPZONE --}}
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
 @endsection
 @section('content')
     <div class="dashboard">
@@ -28,9 +28,9 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="title-container">
-                            <p class="title">Soal Nomor 1</p>
+                            <p class="title">Soal Nomor {{ $current_soal_index }}</p>
                         </div>
-                        <img src="{{ asset('images/local/login.jpg ') }}" class="w-100" />
+                        <img src="{{ asset('images/local/login.jpg ') }}" class="w-100"/>
 
                     </div>
                     <div class="col-7">
@@ -38,9 +38,7 @@
                             <p class="title">Soal</p>
 
                         </div>
-                        <p class="mb-5 ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita unde nobis ad
-                            temporibus quidem maxime odio id itaque. Suscipit dolore illum consequuntur quasi itaque tempore
-                            magnam nisi sit illo quos!</p>
+                        <p class="mb-5 ">{{ $current_soal->soal }}</p>
 
                         <div class="title-container">
                             <p class="title">Pilihan Jawaban</p>
@@ -49,35 +47,35 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                <span>A. </span>Pilihan 1
+                                <span>A. </span> {{ $current_soal->pilihan_1 }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                             <label class="form-check-label" for="flexRadioDefault2">
-                                <span>B. </span> Pilihan 2
+                                <span>B. </span> {{ $current_soal->pilihan_2 }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
                             <label class="form-check-label" for="flexRadioDefault3">
-                                <span>C. </span>Pilihan 3
+                                <span>C. </span>{{ $current_soal->pilihan_3 }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
                             <label class="form-check-label" for="flexRadioDefault4">
-                                <span>D. </span> Pilihan 4
+                                <span>D. </span>{{ $current_soal->pilihan_4 }}
                             </label>
                         </div>
                         <button type="button" class="bt-primary  me-auto mt-5 ">Simpan Jawaban dan ke Soal
-                            berikutnya</button>
+                            berikutnya
+                        </button>
                     </div>
                 </div>
             </div>
 
         </div>
-
 
 
     </div>
@@ -86,13 +84,13 @@
 @section('morejs')
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             var tablesoal = $('#tablesoal').DataTable({
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({
-                            header: function(row) {
+                            header: function (row) {
                                 var data = row.data();
                                 return 'Details for ' + data[0] + ' ' + data[1];
                             }
@@ -104,7 +102,7 @@
                 }
             });
 
-            $(".deletebutton").click(function() {
+            $(".deletebutton").click(function () {
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",
