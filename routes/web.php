@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/pengumuman', function () {
     return view('pengumuman');
@@ -33,13 +32,8 @@ Route::get('/services', function () {
 Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(function () {
-        Route::get('', function () {
-            return view('admin.dashboard');
-        });
-
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        });
+        Route::get('', [\App\Http\Controllers\Admin\dashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\dashboardController::class, 'index'])->name('dash');
 
         Route::prefix('tahunajaran')->group(function () {
             Route::get('datatable', [\App\Http\Controllers\Admin\TahunAjaranController::class, 'datables'])->name('admin.tahunajaran.datatable');
@@ -71,7 +65,6 @@ Route::middleware('auth')->group(function () {
                 Route::match(['POST', 'GET'], '{url}', [\App\Http\Controllers\Admin\SoalController::class, 'index'])->name('admin.paketsoal.soal');
                 Route::post('delete/soal', [\App\Http\Controllers\Admin\SoalController::class, 'delete'])->name('admin.paketsoal.soal.delete');
             });
-
         });
 
         Route::get('/rekapitulasi', function () {

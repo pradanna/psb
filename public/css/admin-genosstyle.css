@@ -3,7 +3,7 @@ body {
 }
 
 .ds {
-  height: 800px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -952,6 +952,41 @@ input.form-control {
 
 .dropzone .dz-preview .dz-error-message {
   top: 144px;
+}
+
+.dashboard-panel {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.dashboard-panel .dashboard-card {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 10px 17px -2px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 5px 10px 17px -2px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 5px 10px 17px -2px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+}
+.dashboard-panel .dashboard-card:nth-child(1) {
+  background-color: rgba(0, 183, 255, 0.3647058824);
+}
+.dashboard-panel .dashboard-card:nth-child(2) {
+  background-color: #9ade7b;
+}
+.dashboard-panel .dashboard-card:nth-child(3) {
+  background-color: #f3b664;
+}
+.dashboard-panel .dashboard-card:nth-child(4) {
+  background-color: #ff8f8f;
+}
+.dashboard-panel p {
+  text-align: center;
+}
+.dashboard-panel p:nth-child(2) {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
