@@ -22,7 +22,11 @@
                 </div>
             </div>
         </div>
-
+        <form method="post" id="form-jawaban">
+            @csrf
+            <input type="hidden" name="soal" value="{{ $current_soal->id }}">
+            <input type="hidden" name="jawaban" id="jawaban-id">
+        </form>
         <div class="menu-container">
             <div class="menu overflow-hidden">
                 <div class="row">
@@ -30,7 +34,9 @@
                         <div class="title-container">
                             <p class="title">Soal Nomor {{ $current_soal_index }}</p>
                         </div>
-                        <img src="{{ asset('images/local/login.jpg ') }}" class="w-100"/>
+                        @if($current_soal->gambar_soal !== null)
+                            <img src="{{ asset($current_soal->gambar_soal) }}" class="w-100" alt="img-"/>
+                        @endif
 
                     </div>
                     <div class="col-7">
@@ -45,30 +51,35 @@
 
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault1"
+                                   value="1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 <span>A. </span> {{ $current_soal->pilihan_1 }}
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                            <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault2"
+                                   value="2">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 <span>B. </span> {{ $current_soal->pilihan_2 }}
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                            <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault3"
+                                   value="3">
                             <label class="form-check-label" for="flexRadioDefault3">
                                 <span>C. </span>{{ $current_soal->pilihan_3 }}
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                            <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault4"
+                                   value="4">
                             <label class="form-check-label" for="flexRadioDefault4">
                                 <span>D. </span>{{ $current_soal->pilihan_4 }}
                             </label>
                         </div>
-                        <button type="button" class="bt-primary  me-auto mt-5 ">Simpan Jawaban dan ke Soal
+                        <button type="button" class="bt-primary  me-auto mt-5 btn-jawab"
+                                data-id="{{ $current_soal->id }}">Simpan Jawaban dan ke Soal
                             berikutnya
                         </button>
                     </div>
@@ -82,51 +93,30 @@
 @endsection
 
 @section('morejs')
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
-        $(document).ready(function () {
-
-            var tablesoal = $('#tablesoal').DataTable({
-                responsive: {
-                    details: {
-                        display: DataTable.Responsive.display.modal({
-                            header: function (row) {
-                                var data = row.data();
-                                return 'Details for ' + data[0] + ' ' + data[1];
-                            }
-                        }),
-                        renderer: DataTable.Responsive.renderer.tableAll({
-                            tableClass: 'table'
-                        })
-                    }
-                }
-            });
-
-            $(".deletebutton").click(function () {
+        function eventJawab() {
+            $('.btn-jawab').on('click', function (e) {
+                let jawaban = $('input[name=jawaban]:checked').val();
+                $('#jawaban-id').val(jawaban);
+                e.preventDefault();
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
+                    title: "Apakah anda yakin?",
+                    text: "apakah anda yakin dengan jawaban yang anda pilih?",
+                    icon: "question",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Ya"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
+                        $('#form-jawaban').submit();
                     }
                 });
-            });
+            })
+        }
 
-            // Note that the name "myDropzone" is the camelized
-            // id of the form.
-            Dropzone.options.myDropzone = {
-                // Configuration options go here
-            };
+        $(document).ready(function () {
+            eventJawab();
         });
     </script>
 @endsection

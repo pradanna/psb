@@ -90,8 +90,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/', [\App\Http\Controllers\Siswa\DashboardController::class, 'index'])->name('siswa.dashboard');
         Route::get('/profil', [\App\Http\Controllers\Siswa\ProfilController::class, 'index'])->name('siswa.profil');
-        Route::get('/soal', [\App\Http\Controllers\Siswa\SoalController::class, 'index'])->name('siswa.soal');
-        Route::get('/soal/{id}', [\App\Http\Controllers\Siswa\SoalController::class, 'soalByID'])->name('siswa.soal.by.id');
+        Route::match(['post', 'get'], '/soal', [\App\Http\Controllers\Siswa\SoalController::class, 'index'])->name('siswa.soal');
+        Route::match(['post', 'get'], '/soal/{id}', [\App\Http\Controllers\Siswa\SoalController::class, 'soalByID'])->name('siswa.soal.by.id');
 //
 //        Route::get('tambah-calonsiswa', function () {
 //            return view('siswa.calonsiswa.tambah_calonsiswa');

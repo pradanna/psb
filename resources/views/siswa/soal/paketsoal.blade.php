@@ -3,8 +3,14 @@
 @section('morecss')
     {{-- DROPZONE --}}
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
+
 @endsection
 @section('content')
+    @if (\Illuminate\Support\Facades\Session::has('failed'))
+        <script>
+            Swal.fire("Ooops", '{{ \Illuminate\Support\Facades\Session::get('failed') }}', "error")
+        </script>
+    @endif
     <div class="dashboard">
         <div class="menu-container">
             <div class="menu d-flex justify-content-between ">
@@ -21,7 +27,10 @@
                 </div>
             </div>
         </div>
-
+        <form method="post" id="form-paket">
+            @csrf
+            <input type="hidden" name="paket" id="paket_id">
+        </form>
         @foreach($paket_soal as $data)
             <div class="menu-container">
                 <div class="menu overflow-hidden">
@@ -51,8 +60,9 @@
                             <p class="mb-0 ">Tersedia 50 Soal dengan pilihan ganda</p>
                             <p class="mb-5 ">Pilih jawaban dengan benar, skor akan muncul setelah siswa mengerjakan</p>
 
-                            <a href="{{ route('siswa.soal.by.id', ['id' => $data->id]) }}"
-                               class="bt-primary  me-auto d-inline ">Mulai Mengerjakan</a>
+
+                            <a href="#"
+                               class="bt-primary  me-auto d-inline btn-register" data-id="{{ $data->id }}">Mulai Mengerjakan</a>
                         </div>
                     </div>
                 </div>
@@ -65,51 +75,38 @@
 @endsection
 
 @section('morejs')
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
-        $(document).ready(function () {
-
-            var tablesoal = $('#tablesoal').DataTable({
-                responsive: {
-                    details: {
-                        display: DataTable.Responsive.display.modal({
-                            header: function (row) {
-                                var data = row.data();
-                                return 'Details for ' + data[0] + ' ' + data[1];
-                            }
-                        }),
-                        renderer: DataTable.Responsive.renderer.tableAll({
-                            tableClass: 'table'
-                        })
-                    }
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+        });
 
-            $(".deletebutton").click(function () {
+        function eventRegister() {
+            $('.btn-register').on('click', function (e) {
+                let id = this.dataset.id;
+                $('#paket_id').val(id);
+                e.preventDefault();
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
+                    title: "Apakah anda yakin?",
+                    text: "apakah anda yakin ingin mengerjakan soal ini?",
+                    icon: "question",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Ya"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
+                        $('#form-paket').submit();
                     }
                 });
-            });
+            })
+        }
 
-            // Note that the name "myDropzone" is the camelized
-            // id of the form.
-            Dropzone.options.myDropzone = {
-                // Configuration options go here
-            };
+        $(document).ready(function () {
+            eventRegister();
         });
     </script>
 @endsection

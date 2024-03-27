@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Calon Siswa || kerjakan Soal</title>
-
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
@@ -60,8 +60,9 @@
             <p>Nomor Soal</p>
             <div class="nomorsoal-wrapper">
                 @foreach($soal as $key => $data)
+
                     <a href="{{ '/'.request()->path().'?nomor='.($key + 1) }}"
-                       class="nomorsoal {{ $current_soal_index === ($key + 1) ? 'active' : '' }}"
+                       class="nomorsoal {{ $current_soal_index === ($key + 1) ? 'active' : ( in_array($data->id, $current_jawaban) ? 'terisi' : '') }}"
                        data-id="{{ $data->id }}">{{ $key + 1 }}</a>
                 @endforeach
             </div>
