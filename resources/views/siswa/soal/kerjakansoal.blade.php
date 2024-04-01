@@ -5,13 +5,25 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
 @endsection
 @section('content')
+    @if (\Illuminate\Support\Facades\Session::has('finish'))
+        <script>
+            Swal.fire({
+                title: 'Success',
+                text: '{{ \Illuminate\Support\Facades\Session::get('finish') }}',
+                icon: 'success',
+                timer: 1000
+            }).then(() => {
+                window.location.href = '{{ route('siswa.soal') }}';
+            })
+        </script>
+    @endif
     <div class="dashboard">
         <div class="menu-container">
             <div class="menu d-flex justify-content-between ">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="me-5">
                     <ol class="breadcrumb mb-0 ">
                         <li class="breadcrumb-item "><a href="#"> <span class="small text-black-50 ">(sisa
-                                    waktu: 02:10:23)</span></a></li>
+                                    waktu: <span id="rest-time">--:--</span>)</span></a></li>
                     </ol>
                 </nav>
 
@@ -22,6 +34,10 @@
                 </div>
             </div>
         </div>
+        <form method="post" id="form-finish"
+              action="{{ route('siswa.soal.by.id.finish', ['id' => $current_soal->paket_soal_id]) }}">
+            @csrf
+        </form>
         <form method="post" id="form-jawaban">
             @csrf
             <input type="hidden" name="soal" value="{{ $current_soal->id }}">
@@ -52,35 +68,36 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault1"
-                                   value="1">
+                                   value="1" {{ $current_jawaban_by_soal !== null ? ($current_jawaban_by_soal->jawaban === 1 ? 'checked' : '' ) : '' }}>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 <span>A. </span> {{ $current_soal->pilihan_1 }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault2"
-                                   value="2">
+                                   value="2" {{ $current_jawaban_by_soal !== null ? ($current_jawaban_by_soal->jawaban === 2 ? 'checked' : '' ) : '' }}>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 <span>B. </span> {{ $current_soal->pilihan_2 }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault3"
-                                   value="3">
+                                   value="3" {{ $current_jawaban_by_soal !== null ? ($current_jawaban_by_soal->jawaban === 3 ? 'checked' : '' ) : '' }}>
                             <label class="form-check-label" for="flexRadioDefault3">
                                 <span>C. </span>{{ $current_soal->pilihan_3 }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="jawaban" id="flexRadioDefault4"
-                                   value="4">
+                                   value="4" {{ $current_jawaban_by_soal !== null ? ($current_jawaban_by_soal->jawaban === 4 ? 'checked' : '' ) : '' }}>
                             <label class="form-check-label" for="flexRadioDefault4">
                                 <span>D. </span>{{ $current_soal->pilihan_4 }}
                             </label>
                         </div>
+
                         <button type="button" class="bt-primary  me-auto mt-5 btn-jawab"
-                                data-id="{{ $current_soal->id }}">Simpan Jawaban dan ke Soal
-                            berikutnya
+                                data-id="{{ $current_soal->id }}">Simpan Jawaban
+                            dan {{ $last_soal ? 'Selesai' : 'ke Soal berikutnya' }}
                         </button>
                     </div>
                 </div>
@@ -94,6 +111,33 @@
 
 @section('morejs')
     <script>
+        var timeStart = '{{ $time_start }}';
+        var duration = '{{ $duration }}';
+        var interval;
+
+        function startTimer() {
+            let durationTime = parseInt(duration);
+            let start = new Date(timeStart);
+            let now = new Date();
+            let timeDiff = start.getTime() - now.getTime();
+            let diffInSeconds = Math.floor(timeDiff / 1000);
+            let minute = Math.floor((diffInSeconds % 3600) / 60);
+            let second = Math.floor(diffInSeconds % 60);
+            let reverseMinute = durationTime + minute;
+            let reverseSecond = 60 + second;
+            let restTime = reverseMinute + ':' + reverseSecond;
+            $('#rest-time').html(restTime);
+            if (interval) {
+                if (reverseMinute < 0) {
+                    clearInterval(interval)
+                    $('#rest-time').html('00:00');
+                    $('#form-finish').submit();
+                }
+            } else {
+                interval = setInterval(startTimer, 1000);
+            }
+        }
+
         function eventJawab() {
             $('.btn-jawab').on('click', function (e) {
                 let jawaban = $('input[name=jawaban]:checked').val();
@@ -116,6 +160,7 @@
         }
 
         $(document).ready(function () {
+            startTimer();
             eventJawab();
         });
     </script>

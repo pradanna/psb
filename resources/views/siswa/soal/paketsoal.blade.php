@@ -11,6 +11,16 @@
             Swal.fire("Ooops", '{{ \Illuminate\Support\Facades\Session::get('failed') }}', "error")
         </script>
     @endif
+    @if (\Illuminate\Support\Facades\Session::has('finish'))
+        <script>
+            Swal.fire({
+                title: 'Success',
+                text: '{{ \Illuminate\Support\Facades\Session::get('finish') }}',
+                icon: 'success',
+                timer: 1000
+            })
+        </script>
+    @endif
     <div class="dashboard">
         <div class="menu-container">
             <div class="menu d-flex justify-content-between ">
