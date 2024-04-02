@@ -21,13 +21,13 @@
         <div class="menu-container">
             <div class="menu overflow-hidden">
                 <div class="title-container">
-                    <div class="d-flex">
+                    <div>
                         <p class="title">Data Rekapitulasi Nilai</p>
                         <select class="form-select" aria-label="Default select example">
                             <option selected>Pilih Tahun Ajaran</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            @foreach ($tahunajarans as $tahunajaran)
+                                <option value={{ $tahunajaran->id }}> {{ $tahunajaran->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Kunci Nilai dan Mulai Rekapitulasi Nilai</a>

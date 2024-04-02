@@ -67,9 +67,7 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::get('/rekapitulasi', function () {
-            return view('admin.rekapitulasi.rekapitulasinilai');
-        });
+        Route::get('/rekapitulasi', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'index'])->name('rekap');
     });
 
     Route::prefix('siswa')->middleware(\App\Http\Middleware\SiswaMiddleware::class)->group(function () {
