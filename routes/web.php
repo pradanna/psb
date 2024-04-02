@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/pengumuman', function () {
     return view('pengumuman');
@@ -33,13 +32,8 @@ Route::get('/services', function () {
 Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(function () {
-        Route::get('', function () {
-            return view('admin.dashboard');
-        });
-
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        });
+        Route::get('', [\App\Http\Controllers\Admin\dashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\dashboardController::class, 'index'])->name('dash');
 
         Route::prefix('tahunajaran')->group(function () {
             Route::get('datatable', [\App\Http\Controllers\Admin\TahunAjaranController::class, 'datables'])->name('admin.tahunajaran.datatable');
@@ -71,37 +65,42 @@ Route::middleware('auth')->group(function () {
                 Route::match(['POST', 'GET'], '{url}', [\App\Http\Controllers\Admin\SoalController::class, 'index'])->name('admin.paketsoal.soal');
                 Route::post('delete/soal', [\App\Http\Controllers\Admin\SoalController::class, 'delete'])->name('admin.paketsoal.soal.delete');
             });
-
         });
 
-        Route::get('/rekapitulasi', function () {
-            return view('admin.rekapitulasi.rekapitulasinilai');
-        });
+        Route::get('/rekapitulasi', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'index'])->name('rekap');
     });
 
     Route::prefix('siswa')->middleware(\App\Http\Middleware\SiswaMiddleware::class)->group(function () {
-        Route::get('', function () {
-            return view('siswa.dashboard');
-        });
+        //        Route::get('', function () {
+        //            return view('siswa.dashboard');
+        //        });
+        //
+        //        Route::get('dashboard', function () {
+        //            return view('siswa.dashboard');
+        //        });
 
-        Route::get('dashboard', function () {
-            return view('siswa.dashboard');
-        });
+        Route::get('/', [\App\Http\Controllers\Siswa\DashboardController::class, 'index'])->name('siswa.dashboard');
+        Route::get('/profil', [\App\Http\Controllers\Siswa\ProfilController::class, 'index'])->name('siswa.profil');
+        Route::match(['post', 'get'], '/soal', [\App\Http\Controllers\Siswa\SoalController::class, 'index'])->name('siswa.soal');
+        Route::match(['post', 'get'], '/soal/{id}', [\App\Http\Controllers\Siswa\SoalController::class, 'soalByID'])->name('siswa.soal.by.id');
+        Route::post('/soal/{id}/finish', [\App\Http\Controllers\Siswa\SoalController::class, 'force_finish'])->name('siswa.soal.by.id.finish');
+        Route::get('/cetakformulir/{id}', [\App\Http\Controllers\CetakFormulirController::class, 'index']);
 
-        Route::get('tambah-calonsiswa', function () {
-            return view('siswa.calonsiswa.tambah_calonsiswa');
-        });
+        //
+        //        Route::get('tambah-calonsiswa', function () {
+        //            return view('siswa.calonsiswa.tambah_calonsiswa');
+        //        });
+        //
+        //        Route::get('detail-calonsiswa', function () {
+        //            return view('siswa.calonsiswa.detail_calonsiswa');
+        //        });
 
-        Route::get('detail-calonsiswa', function () {
-            return view('siswa.calonsiswa.detail_calonsiswa');
-        });
+        //        Route::get('paketsoal', function () {
+        //            return view('siswa.soal.paketsoal');
+        //        });
 
-        Route::get('paketsoal', function () {
-            return view('siswa.soal.paketsoal');
-        });
-
-        Route::get('kerjakansoal', function () {
-            return view('siswa.soal.kerjakansoal');
-        });
+        //        Route::get('kerjakansoal', function () {
+        //            return view('siswa.soal.kerjakansoal');
+        //        });
     });
 });

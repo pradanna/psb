@@ -9,46 +9,11 @@
             <div class="article-content">
                 <div class="article-wrapper">
                     <h1>Informasi Terbaru</h1>
-                    <img src="{{ asset('images/local/login.jpg') }}" />
+                    <img src="{{ asset($informasi->gambar) }}" />
 
-                    <p class="title">Judul Pengumuman</p>
+                    <p class="title">{{ $informasi->judul }}</p>
                     <hr>
-                    <p class="isi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem autem
-                        reiciendis
-                        sunt repudiandae
-                        eum
-                        inventore nesciunt, dignissimos, enim vitae eveniet rerum obcaecati commodi recusandae voluptas
-                        minima!
-                        Eos
-                        blanditiis repellat ducimus?
-
-
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem autem
-                        reiciendis
-                        sunt repudiandae
-                        eum
-                        inventore nesciunt, dignissimos, enim vitae eveniet rerum obcaecati commodi recusandae voluptas
-                        minima!
-                        Eos
-                        blanditiis repellat ducimus?
-
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem autem
-                        reiciendis
-                        sunt repudiandae
-                        eum
-                        inventore nesciunt, dignissimos, enim vitae eveniet rerum obcaecati commodi recusandae voluptas
-                        minima!
-                        Eos
-                        blanditiis repellat ducimus?
-
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem autem
-                        reiciendis
-                        sunt repudiandae
-                        eum
-                        inventore nesciunt, dignissimos, enim vitae eveniet rerum obcaecati commodi recusandae voluptas
-                        minima!
-                        Eos
-                        blanditiis repellat ducimus?
+                    <p class="isi">{{ $informasi->informasi }}
                     </p>
                 </div>
 

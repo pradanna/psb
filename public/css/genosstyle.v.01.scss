@@ -130,6 +130,9 @@ body {
 
   .hero-text {
     margin-top: 50px;
+    img {
+      width: 90%;
+    }
     span {
       width: 1060px;
       display: block;
@@ -729,7 +732,6 @@ body {
   width: 900px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: -50px;
   background-color: white;
   z-index: 10;
   position: relative;

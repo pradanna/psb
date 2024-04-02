@@ -5,6 +5,21 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endsection
 @section('content')
+    @if (\Illuminate\Support\Facades\Session::has('failed'))
+        <script>
+            Swal.fire("Ooops", '{{ \Illuminate\Support\Facades\Session::get('failed') }}', "error")
+        </script>
+    @endif
+    @if (\Illuminate\Support\Facades\Session::has('finish'))
+        <script>
+            Swal.fire({
+                title: 'Success',
+                text: '{{ \Illuminate\Support\Facades\Session::get('finish') }}',
+                icon: 'success',
+                timer: 1000
+            })
+        </script>
+    @endif
     <div class="dashboard">
         <div class="menu-container">
             <div class="menu d-flex justify-content-between ">
@@ -21,93 +36,82 @@
                 </div>
             </div>
         </div>
-
-        <div class="menu-container">
-            <div class="menu overflow-hidden">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="title-container">
-                            <p class="title">Data Paket Soal</p>
+        <form method="post" id="form-paket">
+            @csrf
+            <input type="hidden" name="paket" id="paket_id">
+        </form>
+        @foreach ($paket_soal as $data)
+            <div class="menu-container">
+                <div class="menu overflow-hidden">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="title-container">
+                                <p class="title">Data Paket Soal</p>
+                            </div>
+                            <img src="{{ asset($data->gambar) }}" alt="img-soal" class="w-100" />
                         </div>
-                        <img src="{{ asset('images/local/login.jpg ') }}" class="w-100" />
+                        <div class="col-7">
+                            <div class="title-container">
+                                <p class="title">{{ $data->nama }}</p>
+                            </div>
 
-                    </div>
-                    <div class="col-7">
-                        <div class="title-container">
-                            <p class="title">Informasi Paket</p>
+                            <p class="mb-0 ">Tahun Ajaran : {{ $data->tahun_ajaran->nama }}</p>
+                            <p class="mb-0 ">Lama Waktu Pengerjaan : {{ $data->durasi }} Menit</p>
+                            <p class="mb-5 ">Pengerjaan soal akan diadakan
+                                pada {{ \Carbon\Carbon::parse($data->waktu_pengerjaan)->format('d F Y H:i:s') }} WIB</p>
 
+                            <div class="title-container">
+                                <p class="title">Peraturan</p>
+
+                            </div>
+                            <p class="mb-0 ">Kerjakan soal ini di MTs Negeri 3 Sragen</p>
+                            <p class="mb-0 ">Dimohon datang 30 menit sebelum waktu pengerjaan</p>
+                            <p class="mb-5 ">Pilih jawaban dengan benar, skor akan muncul setelah siswa mengerjakan</p>
+
+
+                            <a href="#" class="bt-primary  me-auto d-inline btn-register"
+                                data-id="{{ $data->id }}">Mulai Mengerjakan</a>
                         </div>
-                        <p class="mb-0 ">Tahun Ajaran : 2024/2025</p>
-                        <p class="mb-0 ">Lama Waktu Pengerjaan : 2 Jam 30 Menit</p>
-                        <p class="mb-5 ">Pengerjaan soal akan diadakan pada 20-02-2024 13:00 WIB</p>
-
-                        <div class="title-container">
-                            <p class="title">Peraturan</p>
-
-                        </div>
-                        <p class="mb-0 ">Kerjakan soal ini di MTs Negeri 3 Sragen</p>
-                        <p class="mb-0 ">Dimohon datang 30 menit sebelum waktu pengerjaan</p>
-                        <p class="mb-0 ">Tersedia 50 Soal dengan pilihan ganda</p>
-                        <p class="mb-5 ">Pilih jawaban dengan benar, skor akan muncul setelah siswa mengerjakan</p>
-
-                        <a href="/siswa/kerjakansoal" class="bt-primary  me-auto d-inline ">Mulai Mengerjakan</a>
                     </div>
                 </div>
             </div>
-
-        </div>
-
-
-
+        @endforeach
     </div>
 @endsection
 
 @section('morejs')
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
-        $(document).ready(function() {
-
-            var tablesoal = $('#tablesoal').DataTable({
-                responsive: {
-                    details: {
-                        display: DataTable.Responsive.display.modal({
-                            header: function(row) {
-                                var data = row.data();
-                                return 'Details for ' + data[0] + ' ' + data[1];
-                            }
-                        }),
-                        renderer: DataTable.Responsive.renderer.tableAll({
-                            tableClass: 'table'
-                        })
-                    }
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+        });
 
-            $(".deletebutton").click(function() {
+        function eventRegister() {
+            $('.btn-register').on('click', function(e) {
+                let id = this.dataset.id;
+                $('#paket_id').val(id);
+                e.preventDefault();
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
+                    title: "Apakah anda yakin?",
+                    text: "apakah anda yakin ingin mengerjakan soal ini?",
+                    icon: "question",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Ya"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
+                        $('#form-paket').submit();
                     }
                 });
-            });
+            })
+        }
 
-            // Note that the name "myDropzone" is the camelized
-            // id of the form.
-            Dropzone.options.myDropzone = {
-                // Configuration options go here
-            };
+        $(document).ready(function() {
+            eventRegister();
         });
     </script>
 @endsection
