@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CalonSiswa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\App;
 
@@ -10,26 +11,23 @@ use function PHPSTORM_META\type;
 class CetakFormulirController extends Controller
 {
 
-    public function index()
+    public function index($id)
     {
         // return $this->dataTransaksi($id);
         $trans = [];
         $pdf   = App::make('dompdf.wrapper');
 
-        $pdf->loadHTML($this->dataTransaksi())->setPaper('A4', 'potrait')->save('Laporan.pdf');
+        $pdf->loadHTML($this->dataTransaksi($id))->setPaper('A4', 'potrait')->save('Laporan.pdf');
 
         //        $data = $this->dataTransaksi($id);
         //         return view('admin/project/penawaran', ['data' => $data]);
         return $pdf->stream();
     }
 
-    public function dataTransaksi()
+    public function dataTransaksi($id)
     {
 
-        // if (\request('start')) {
-        //     $trans = $trans->whereBetween('created_at', ["$start 00:00:00", "$end 23:59:59"]);
-        // }
-        // $trans = $trans->get();
-        return view('siswa.calonsiswa.cetakformulir');
+        $siswa = CalonSiswa::with(['user'])->find($id);
+        return view('siswa.calonsiswa.cetakformulir', ['siswa' => $siswa]);
     }
 }

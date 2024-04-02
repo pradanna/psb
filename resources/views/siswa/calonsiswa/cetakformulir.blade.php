@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Formulir ("Nama Siswa")</title>
+    <title>Formulir {{ $siswa->url_foto }}</title>
     <!-- Fonts -->
 
     <!-- Styles -->
@@ -136,7 +136,7 @@
                             :
                         </td>
                         <td>
-                            Bagus Yanuar
+                            {{ $siswa->user->nama }}
                         </td>
                     </tr>
                     <tr>
@@ -147,7 +147,7 @@
                             :
                         </td>
                         <td>
-                            Surakarta, 25 Januari 2012
+                            {{ $siswa->tempat_lahir }}, {{ $siswa->tanggal_lahir }} S
                         </td>
                     </tr>
                     <tr>
@@ -158,7 +158,7 @@
                             :
                         </td>
                         <td>
-                            Laki-laki
+                            {{ $siswa->jenis_kelamin }}
                         </td>
                     </tr>
                     <tr>
@@ -169,22 +169,10 @@
                             :
                         </td>
                         <td>
-                            Bagus Yanuar
+                            {{ $siswa->alamat }}
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            Nama
-                        </td>
-                        <td>
-                            :
-                        </td>
-                        <td>
-                            Jl. Raya Timur Km. 15,
-                            Sambungmacan
-                            Pos 57253
-                        </td>
-                    </tr>
+
                     <tr>
                         <td>
                             Asal Sekolah
@@ -193,7 +181,7 @@
                             :
                         </td>
                         <td>
-                            SD NEGERI SRAGEN 5
+                            {{ $siswa->asal_sekolah }}
                         </td>
                     </tr>
                     <tr>
@@ -204,14 +192,14 @@
                             :
                         </td>
                         <td>
-                            0897-1028-1273
+                            {{ $siswa->no_hp }}
                         </td>
                     </tr>
                 </table>
             </div>
 
             <div style="float: right">
-                <img src="https://cdn.eurekabookhouse.co.id/ebh/product/all/zikri_hadi.jpg" style="width: 200px" />
+                <img src="{{ public_path() }}{{ $siswa->url_foto }}" style="width: 200px" />
             </div>
         </div>
 

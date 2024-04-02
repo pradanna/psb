@@ -21,7 +21,15 @@
         <div class="menu-container">
             <div class="menu overflow-hidden">
                 <div class="title-container">
-                    <p class="title">Data Rekapitulasi Nilai</p>
+                    <div class="d-flex">
+                        <p class="title">Data Rekapitulasi Nilai</p>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Pilih Tahun Ajaran</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
                     <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Kunci Nilai dan Mulai Rekapitulasi Nilai</a>
                 </div>
                 <table id="tableRekapitulasi Nilai" class="table table-striped" style="width:100%">

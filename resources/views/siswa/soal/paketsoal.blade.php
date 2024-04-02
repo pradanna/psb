@@ -2,8 +2,7 @@
 
 @section('morecss')
     {{-- DROPZONE --}}
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
-
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endsection
 @section('content')
     @if (\Illuminate\Support\Facades\Session::has('failed'))
@@ -41,7 +40,7 @@
             @csrf
             <input type="hidden" name="paket" id="paket_id">
         </form>
-        @foreach($paket_soal as $data)
+        @foreach ($paket_soal as $data)
             <div class="menu-container">
                 <div class="menu overflow-hidden">
                     <div class="row">
@@ -49,13 +48,13 @@
                             <div class="title-container">
                                 <p class="title">Data Paket Soal</p>
                             </div>
-                            <img src="{{ asset($data->gambar) }}" alt="img-soal" class="w-100"/>
+                            <img src="{{ asset($data->gambar) }}" alt="img-soal" class="w-100" />
                         </div>
                         <div class="col-7">
                             <div class="title-container">
                                 <p class="title">{{ $data->nama }}</p>
-
                             </div>
+
                             <p class="mb-0 ">Tahun Ajaran : {{ $data->tahun_ajaran->nama }}</p>
                             <p class="mb-0 ">Lama Waktu Pengerjaan : {{ $data->durasi }} Menit</p>
                             <p class="mb-5 ">Pengerjaan soal akan diadakan
@@ -67,26 +66,22 @@
                             </div>
                             <p class="mb-0 ">Kerjakan soal ini di MTs Negeri 3 Sragen</p>
                             <p class="mb-0 ">Dimohon datang 30 menit sebelum waktu pengerjaan</p>
-                            <p class="mb-0 ">Tersedia 50 Soal dengan pilihan ganda</p>
                             <p class="mb-5 ">Pilih jawaban dengan benar, skor akan muncul setelah siswa mengerjakan</p>
 
 
-                            <a href="#"
-                               class="bt-primary  me-auto d-inline btn-register" data-id="{{ $data->id }}">Mulai Mengerjakan</a>
+                            <a href="#" class="bt-primary  me-auto d-inline btn-register"
+                                data-id="{{ $data->id }}">Mulai Mengerjakan</a>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         @endforeach
-
     </div>
 @endsection
 
 @section('morejs')
     <script>
-        $(function () {
+        $(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -95,7 +90,7 @@
         });
 
         function eventRegister() {
-            $('.btn-register').on('click', function (e) {
+            $('.btn-register').on('click', function(e) {
                 let id = this.dataset.id;
                 $('#paket_id').val(id);
                 e.preventDefault();
@@ -115,7 +110,7 @@
             })
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             eventRegister();
         });
     </script>
