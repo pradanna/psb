@@ -13,37 +13,41 @@ class TahunAjaranController extends Controller
         $data = TahunAjaran::query();
 
         return DataTables::of($data)
-                         ->make(true);
+            ->make(true);
     }
 
-    public function getData(){
+    public function getData()
+    {
         return TahunAjaran::all();
     }
 
     public function index()
     {
-        if (request()->method() == 'POST'){
+        if (request()->method() == 'POST') {
             return $this->post();
         }
         return view('admin.tahunajaran.tahunajaran');
     }
 
-    public function post(){
+    public function post()
+    {
         $field = request()->validate([
-            'nama' => 'required'
+            'nama' => 'required',
+            'jumlah_siswa' => 'required'
         ]);
 
-        if (request('id')){
+        if (request('id')) {
             $tahun = TahunAjaran::find(request('id'));
             $tahun->update($field);
-        }else{
+        } else {
             TahunAjaran::create($field);
         }
 
         return 'success';
     }
 
-    public function delete(){
+    public function delete()
+    {
         $data = TahunAjaran::find(request('id'));
         $data->delete();
 
@@ -54,5 +58,4 @@ class TahunAjaranController extends Controller
             200
         );
     }
-
 }

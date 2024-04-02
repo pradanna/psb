@@ -10,6 +10,7 @@ class TahunAjaran extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama'
+        'nama',
+        'jumlah_siswa'
     ];
 }

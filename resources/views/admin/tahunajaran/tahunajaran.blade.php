@@ -34,32 +34,34 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Tahun Ajaran</th>
+                                    <th>Jumlah Siswa yang diterima</th>
                                     <th>Action</th>
                                     {{-- detail, ubah status pesanan --}}
                                 </tr>
                             </thead>
-{{--                            <tbody>--}}
-{{--                                <tr>--}}
+                            {{--                            <tbody> --}}
+                            {{--                                <tr> --}}
 
-{{--                                    <td><span class="maxlines">2024/2025</span></td>--}}
+                            {{--                                    <td><span class="maxlines">2024/2025</span></td> --}}
 
-{{--                                    </td>--}}
-{{--                                    <td><span class="d-flex gap-1">--}}
-{{--                                            <a class="btn-primary-sm">Lihat Data Peserta--}}
-{{--                                            </a>--}}
-{{--                                            <a class="btn-warning-sm">Lihat Soal--}}
-{{--                                            </a>--}}
-{{--                                            <a class="btn-danger-sm deletebutton">Hapus--}}
-{{--                                            </a>--}}
-{{--                                        </span>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
+                            {{--                                    </td> --}}
+                            {{--                                    <td><span class="d-flex gap-1"> --}}
+                            {{--                                            <a class="btn-primary-sm">Lihat Data Peserta --}}
+                            {{--                                            </a> --}}
+                            {{--                                            <a class="btn-warning-sm">Lihat Soal --}}
+                            {{--                                            </a> --}}
+                            {{--                                            <a class="btn-danger-sm deletebutton">Hapus --}}
+                            {{--                                            </a> --}}
+                            {{--                                        </span> --}}
+                            {{--                                    </td> --}}
+                            {{--                                </tr> --}}
 
-{{--                            </tbody>--}}
+                            {{--                            </tbody> --}}
                             <tfoot>
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Tahun Ajaran</th>
+                                    <th>Jumlah Siswa yang diterima</th>
                                     <th>Action</th>
                                     {{-- detail, ubah status pesanan --}}
                                 </tr>
@@ -79,8 +81,14 @@
 
                         <div class="form-group mb-3">
                             <label for="nama" class="form-label">Nama Tahun Ajaran</label>
-                            <input type="text" class="form-control" required id="nama" name="nama" pattern="[0-9]{4}/[0-9]{4}"
-                                placeholder="2023/2024">
+                            <input type="text" class="form-control" required id="nama" name="nama"
+                                pattern="[0-9]{4}/[0-9]{4}" placeholder="2023/2024">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="jumlah_siswa" class="form-label">Jumlah siswa yang diterima</label>
+                            <input type="number" class="form-control" required id="jumlah_siswa" name="jumlah_siswa"
+                                placeholder="60">
                         </div>
 
 
@@ -97,54 +105,68 @@
 
 @section('morejs')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             showData()
         })
+
         function showData() {
-            let column = [
-                {
+            let column = [{
                     className: "text-center",
                     orderable: false,
                     defaultContent: "",
                     searchable: false
                 },
                 {
-                    data: 'nama', name: 'nama', className: "text-center",},
+                    data: 'nama',
+                    name: 'nama',
+                    className: "text-center",
+                },
+                {
+                    data: 'jumlah_siswa',
+                    name: 'julah_siswa',
+                    className: "text-right",
+                },
                 {
                     className: "text-center",
-                    data:'id',
-                    name: 'action', orderable: false, searchable: false,
-                    render: function (data,x, row) {
-                      return '<span class="d-flex gap-1">'+
-                         ' <a class="btn-primary-sm"  href="/admin/calonsiswa?t='+row.nama+'">Lihat Data Peserta'+
-                        ' </a>'+
-                        ' <a class="btn-warning-sm"  href="/admin/paketsoal?t='+row.nama+'">Lihat Soal'+
-                        ' </a>'+
-                        ' <a class="btn-danger-sm" id="deleteData" data-id="'+data+'" data-nama="'+row.nama+'">Hapus'+
-                        ' </a>'+
-                          ' </span>';
+                    data: 'id',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, x, row) {
+                        return '<span class="d-flex gap-1">' +
+                            ' <a class="btn-primary-sm"  href="/admin/calonsiswa?t=' + row.nama +
+                            '">Lihat Data Peserta' +
+                            ' </a>' +
+                            ' <a class="btn-warning-sm"  href="/admin/paketsoal?t=' + row.nama + '">Lihat Soal' +
+                            ' </a>' +
+                            ' <a class="btn-danger-sm" id="deleteData" data-id="' + data + '" data-nama="' + row
+                            .nama + '">Hapus' +
+                            ' </a>' +
+                            ' </span>';
                     }
                 },
             ]
-            datatable('tabel','{{route('admin.tahunajaran.datatable')}}',column)
+            datatable('tabel', '{{ route('admin.tahunajaran.datatable') }}', column)
         }
 
-        function confirmSaveData(){
-            saveData('Simpan tahun ajaran','form','{{route('admin.tahunajaran')}}', afterSave)
+        function confirmSaveData() {
+            saveData('Simpan tahun ajaran', 'form', '{{ route('admin.tahunajaran') }}', afterSave)
             return false;
         }
 
         function afterSave() {
             $('#nama').val('')
+            $('#tahun_ajaran').val('')
             $('#tabel').DataTable().ajax.reload();
         }
 
-        $(document).on('click', '#deleteData', function () {
+        $(document).on('click', '#deleteData', function() {
             let form = {
-                '_token': '{{csrf_token()}}',
-                'id': $(this).data('id')
+                '_token': '{{ csrf_token() }}',
+                'id': $(this).data('id'),
+
             }
-            deleteData('soal ' + $(this).data('name'), '{{route('admin.tahunajaran.delete')}}',form, afterSave)
+            deleteData('soal ' + $(this).data('name'), '{{ route('admin.tahunajaran.delete') }}', form, afterSave)
             return false
         })
     </script>
