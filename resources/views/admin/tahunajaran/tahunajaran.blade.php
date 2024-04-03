@@ -123,7 +123,7 @@
                 },
                 {
                     data: 'jumlah_siswa',
-                    name: 'julah_siswa',
+                    name: 'jumlah_siswa',
                     className: "text-right",
                 },
                 {

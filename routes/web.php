@@ -67,7 +67,12 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::get('/rekapitulasi', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'index'])->name('rekap');
+
+
+        Route::prefix('rekapitulasi')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'index'])->name('rekap');
+            Route::get('/calonsiswa', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'siswaByTahunAjaran'])->name('admin.rekapitulasi.siswa');
+        });
     });
 
     Route::prefix('siswa')->middleware(\App\Http\Middleware\SiswaMiddleware::class)->group(function () {

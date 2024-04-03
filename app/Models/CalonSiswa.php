@@ -24,11 +24,25 @@ class CalonSiswa extends Model
         'user_id'
     ];
 
-    public function user(){
-        return $this->belongsTo(User::class,'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function tahun_ajaran(){
-        return $this->belongsTo(TahunAjaran::class,'tahun_ajaran_id');
+    public function tahun_ajaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+    }
+
+    /**
+     * Scope a query to only include calon siswa of a specific tahun_ajaran.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int $tahunajaran
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTahunAjaran($query, $tahunajaran)
+    {
+        return $query->where('tahun_ajaran_id', $tahunajaran);
     }
 }
