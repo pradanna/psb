@@ -34,6 +34,8 @@ class CalonSiswa extends Model
         return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
     }
 
+
+
     /**
      * Scope a query to only include calon siswa of a specific tahun_ajaran.
      *

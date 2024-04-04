@@ -12,7 +12,8 @@ class Jawaban extends Model
     protected $fillable = [
         'registrant_id',
         'soal_id',
-        'jawaban'
+        'jawaban',
+        'score'
     ];
 
     public function registrant()

@@ -53,7 +53,6 @@ class SoalController
                 }
                 return redirect()->route('siswa.soal.by.id', ['id' => $paketID]);
             }
-
         } catch (\Exception $e) {
             return redirect()->back()->with('failed', 'gagal menegerjakan soal...');
         }
@@ -124,15 +123,25 @@ class SoalController
             $jawaban = request()->request->get('jawaban');
             $soal = request()->request->get('soal');
 
+            $soalnow = Soal::find($soal);
+            $jawabanBenar = $soalnow->jawaban_benar;
+            $score = 0;
+
+            if ($jawabanBenar == $jawaban) {
+                $score = 1;
+            }
+
             if ($currentJawabanBySoal) {
                 $currentJawabanBySoal->update([
-                    'jawaban' => $jawaban
+                    'jawaban' => $jawaban,
+                    'score' => $score
                 ]);
             } else {
                 $data = [
                     'registrant_id' => $registrant->id,
                     'soal_id' => $soal,
-                    'jawaban' => $jawaban
+                    'jawaban' => $jawaban,
+                    'score' => $score
                 ];
                 Jawaban::create($data);
             }
