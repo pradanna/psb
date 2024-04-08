@@ -29,7 +29,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a class="btn-primary-sm" href="/admin/tambah-calonsiswa">Kunci Nilai dan Mulai Rekapitulasi Nilai</a>
+                    <a class="btn-primary-sm" id="kuncidanrekap">Kunci Nilai dan Mulai Rekapitulasi Nilai</a>
                 </div>
                 <table id="tabel" class="table table-striped" style="width:100%">
                     <thead>
@@ -105,8 +105,8 @@
                     },
 
                     {
-                        data: 'alamat',
-                        name: 'alamat'
+                        data: 'user.registrans.scored',
+                        name: 'user.registrans.scored'
                     },
                     {
                         data: 'status_penerimaan',
@@ -125,6 +125,38 @@
         // Event handler untuk memperbarui tabel saat memilih tahun ajaran
         $('#id_tahun_ajaran').on('change', function() {
             $('#tabel').DataTable().ajax.reload();
+        });
+
+        // Fungsi untuk melakukan pemilihan dua siswa terbaik
+        function selectTopTwoStudents() {
+            // Kirim permintaan ke backend dengan menggunakan AJAX
+            $.ajax({
+                url: '/admin/rekapitulasi/select-top-two-students', // Sesuaikan dengan URL endpoint Anda
+                method: 'POST', // Sesuaikan dengan metode HTTP yang digunakan
+                async: true,
+                headers: {
+                    'Accept': "application/json",
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    tahun_ajaran: $('#id_tahun_ajaran').val()
+                },
+                success: function(response) {
+                    // Tampilkan pesan sukses atau lakukan tindakan lainnya
+                    alert('Dua siswa terbaik berhasil dipilih!');
+                },
+                error: function(xhr, status, error) {
+                    // Tangani kesalahan jika permintaan gagal
+                    console.error(error);
+                    alert('Terjadi kesalahan saat memilih dua siswa terbaik.');
+                }
+            });
+
+            $('#tabel').DataTable().ajax.reload();
+        }
+
+        document.getElementById('kuncidanrekap').addEventListener('click', function() {
+            selectTopTwoStudents();
         });
     </script>
 @endsection

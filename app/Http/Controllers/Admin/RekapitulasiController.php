@@ -18,7 +18,7 @@ class RekapitulasiController extends Controller
 
     public function siswaByTahunAjaran(Request $request)
     {
-        // Ambil tahun ajaran dari request
+        // Ambil tah un ajaran dari request
         $tahunAjaran = $request->input('tahun_ajaran');
 
         // Jika tidak ada tahun ajaran yang diberikan, kembalikan kesalahan
@@ -26,25 +26,58 @@ class RekapitulasiController extends Controller
             return response()->json(['error' => 'Parameter tahun_ajaran diperlukan'], 400);
         }
 
-        // Cari calon siswa berdasarkan tahun ajaran
-        // $calonSiswa = CalonSiswa::with(['user', 'tahun_ajaran'])->leftJoin('jawabans', 'siswa.id', '=', 'jawaban.siswa_id')
-        //     ->select('siswa.*')
-        //     ->selectRaw('COUNT(CASE WHEN jawaban.benar = 1 THEN 1 END) AS scores')
-        //     ->where('tahun_ajaran_id', $tahunAjaran)
-        //     ->groupBy('siswa.id')->get();
+        $calonSiswa = CalonSiswa::with(['user.registrans' => function ($query) {
+            $query->withCount([
+                'jawabans as scored' => function ($query) {
+                    $query->select(DB::raw('SUM(case when score = 1 then 1 else 0 end)'));
+                }
+            ]);
+        }])->where('tahun_ajaran_id', $tahunAjaran)->get();
 
-        $calonSiswa = CalonSiswa::leftJoin('registrants', 'calon_siswas.id', '=', 'registrants.user_id')
-            ->leftJoin('jawabans', 'registrants.id', '=', 'jawabans.registrant_id')
-            ->select(
-                'calon_siswas.*',
-                DB::raw('COUNT(CASE WHEN jawabans.score = 1 THEN 1 END) AS scored')
-            )->where('tahun_ajaran_id', $tahunAjaran)
-            ->groupBy('calon_siswas.id')
-            ->get();
-
-        dd($calonSiswa);
 
         // Kembalikan data dalam bentuk response JSON
         return response()->json($calonSiswa, 200);
+    }
+
+    public function rekapitulasi(Request $request)
+    {
+        // Ambil tah un ajaran dari request
+        $tahunAjaran = $request->input('tahun_ajaran');
+        $tahunajarandipilih = TahunAjaran::find($tahunAjaran);
+        $jumlahsiswaditerima = $tahunajarandipilih->jumlah_siswa;
+
+        // Jika tidak ada tahun ajaran yang diberikan, kembalikan kesalahan
+        if (!$tahunAjaran) {
+            return response()->json(['error' => 'Parameter tahun_ajaran diperlukan'], 400);
+        }
+
+        $calonSiswa = CalonSiswa::with(['user.registrans' => function ($query) {
+            $query->withCount([
+                'jawabans as scored' => function ($query) {
+                    $query->select(DB::raw('SUM(case when score = 1 then 1 else 0 end)'));
+                }
+            ]);
+        }])->where('tahun_ajaran_id', $tahunAjaran)->get();
+
+        $siswasSorted = $calonSiswa->sortByDesc('user.registrans.scored');
+
+        // Ambil dua siswa teratas
+        $topTwoSiswa = $siswasSorted->take($jumlahsiswaditerima);
+
+        // Tandai siswa yang lolos dan tidak lolos (jika perlu)
+        foreach ($calonSiswa as $siswa) {
+            if ($topTwoSiswa->contains($siswa)) {
+                $siswa->status_penerimaan = "diterima";
+            } else {
+                $siswa->status_penerimaan = "ditolak";
+            }
+        }
+
+        // Simpan perubahan ke database (jika diperlukan)
+        foreach ($calonSiswa as $siswa) {
+            $siswa->save();
+        }
+
+        return response()->json(['message' => 'Dua siswa terbaik berhasil dipilih'], 200);
     }
 }

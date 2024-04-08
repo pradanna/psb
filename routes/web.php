@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RekapitulasiController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +73,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('rekapitulasi')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'index'])->name('rekap');
             Route::get('/calonsiswa', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'siswaByTahunAjaran'])->name('admin.rekapitulasi.siswa');
+            Route::post('/select-top-two-students', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'rekapitulasi']);
         });
     });
 

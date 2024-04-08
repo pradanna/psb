@@ -44,7 +44,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function calon_siswa(){
-        return $this->hasOne(CalonSiswa::class,'user_id');
+    public function calon_siswa()
+    {
+        return $this->hasOne(CalonSiswa::class, 'user_id');
+    }
+
+    public function registrans()
+    {
+        return $this->hasOne(Registrant::class, 'user_id');
     }
 }
