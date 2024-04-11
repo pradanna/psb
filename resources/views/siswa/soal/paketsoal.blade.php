@@ -69,8 +69,16 @@
                             <p class="mb-5 ">Pilih jawaban dengan benar, skor akan muncul setelah siswa mengerjakan</p>
 
 
-                            <a href="#" class="bt-primary  me-auto d-inline btn-register"
-                                data-id="{{ $data->id }}">Mulai Mengerjakan</a>
+                            @if ($paket_soal[0]->status === 'menunggu')
+                                <a class="bt-grey  me-auto d-inliner w-25">Menunggu Waktu Mengerjakan</a>
+                            @elseif($paket_soal[0]->status === 'siap')
+                                <a href="#" class="bt-primary  me-auto d-inline btn-register"
+                                    data-id="{{ $data->id }}">Mulai
+                                    Mengerjakan</a>
+                            @else
+                                <a class="bt-grey  me-auto d-inline w-25">Sudah
+                                    Selesai</a>
+                            @endif
                         </div>
                     </div>
                 </div>

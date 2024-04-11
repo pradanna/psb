@@ -32,11 +32,15 @@ class RekapitulasiController extends Controller
                     $query->select(DB::raw('SUM(case when score = 1 then 1 else 0 end)'));
                 }
             ]);
-        }])->where('tahun_ajaran_id', $tahunAjaran)->get();
+        }])->where('tahun_ajaran_id', $tahunAjaran)->orderBy('tempat_lahir', 'desc')->get();
 
+        // Sort the collection by the scored attribute
+        $sortedCalonSiswa = $calonSiswa->sortByDesc(function ($siswa) {
+            return $siswa->user->registrans->scored;
+        });
 
+        return response()->json($sortedCalonSiswa->values()->all(), 200);
         // Kembalikan data dalam bentuk response JSON
-        return response()->json($calonSiswa, 200);
     }
 
     public function rekapitulasi(Request $request)

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\RekapitulasiController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/pengumuman', function () {
-    return view('pengumuman');
-});
+Route::get('/pengumuman', [\App\Http\Controllers\pengumumanPenerimaanController::class, 'index'])->name('pengumumanKelulusan');
+Route::get('/tabelpengumuman', [\App\Http\Controllers\pengumumanPenerimaanController::class, 'siswaByTahunAjaran'])->name('tabel.pengumuman');
 
 Route::match(['GET', 'POST'], '/login', [\App\Http\Controllers\auth\LoginController::class, 'index'])->name('login');
 Route::get('/logout', [\App\Http\Controllers\auth\LoginController::class, 'logout']);
@@ -73,7 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('rekapitulasi')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'index'])->name('rekap');
             Route::get('/calonsiswa', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'siswaByTahunAjaran'])->name('admin.rekapitulasi.siswa');
-            Route::post('/select-top-two-students', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'rekapitulasi']);
+            Route::post('/select-top-students', [\App\Http\Controllers\Admin\RekapitulasiController::class, 'rekapitulasi']);
         });
     });
 

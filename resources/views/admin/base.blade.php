@@ -162,8 +162,7 @@
                             <div class="content">
 
                                 <a id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img
-                                        src="https://store.sirclo.com/blog/wp-content/uploads/2022/04/6.-user-persona.jpg" />
+                                    <img src="https://www.freeiconspng.com/thumbs/account-icon/account-icon-33.png" />
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

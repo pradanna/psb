@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Yousee Indonesia || Sewa Billboard, Media Iklan</title>
+    <title>MTSN SRAGEN</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -43,14 +43,18 @@
 
 </head>
 
-<body>
+<body class="bg-web">
     <nav class="g-navbar container ">
         <img src="{{ asset('images/local/logo.png') }}" />
         <div class="g-nav-menu">
-            <a class="menu active" href="/">Beranda<span class="indicator "></span></a>
-            <a class="menu" href="/pengumuman">Pengumuman Penerimaan<span class="indicator"></span></a>
-            <a class="menu" href="/daftar">Daftar <span class="indicator"></span></a>
-            <a class="menu" href="/login">Masuk <span class="indicator"></span></a>
+            <a class="menu {{ Request::is('/') ? 'active' : '' }}" href="/">Beranda<span
+                    class="indicator "></span></a>
+            <a class="menu {{ Request::is('pengumuman') ? 'active' : '' }}" href="/pengumuman">Pengumuman
+                Penerimaan<span class="indicator"></span></a>
+            <a class="menu {{ Request::is('daftar') ? 'active' : '' }}" href="/daftar">Daftar <span
+                    class="indicator"></span></a>
+            <a class="menu {{ Request::is('login') ? 'active' : '' }}" href="/login">Masuk <span
+                    class="indicator"></span></a>
         </div>
         <div class="g-nav-social">
             <a>

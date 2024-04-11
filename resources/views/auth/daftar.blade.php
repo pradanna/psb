@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('base')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Daftar</title>
+@section('morecss')
     <link rel="shortcut icon" href="{{ asset('images/local/favicon.ico') }}" title="Favicon" />
 
     <!-- Fonts -->
@@ -24,11 +20,8 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </link>
-
-</head>
-
-<body class="w-100 h-100 bg-login">
-
+@endsection
+@section('content')
     <div class="login">
         <div class="panel-login pinggiran-bunder-10   " style="height: auto; margin-bottom: 100px; margin-top: 100px; ">
 
@@ -96,15 +89,15 @@
                         <div class="mb-3">
                             <div class="d-flex gap-3  ">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        value="Laki - Laki" id="p-laki">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" value="Laki - Laki"
+                                        id="p-laki">
                                     <label class="form-check-label" for="p-laki">
                                         Laki-laki
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        value="Perempuan" id="p-perempuan" checked>
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan"
+                                        id="p-perempuan" checked>
                                     <label class="form-check-label" for="p-perempuan">
                                         Perempuan
                                     </label>
@@ -195,8 +188,8 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating ">
-                                    <input type="text" class="form-control" id="p-password" name="password"
-                                        required placeholder="Password">
+                                    <input type="text" class="form-control" id="p-password" name="password" required
+                                        placeholder="Password">
                                     <label for="p-password" class="form-label">Password</label>
                                 </div>
                                 @if ($errors->has('password'))
@@ -248,6 +241,4 @@
             setImgDropify('foto', "Masukkan foto");
         });
     </script>
-</body>
-
-</html>
+@endsection

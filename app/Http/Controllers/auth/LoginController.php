@@ -26,21 +26,31 @@ class LoginController extends Controller
                 'password' => 'required|string',
             ]
         );
-//            $user = User::where('username', $field['username'])->first();
-//            if ($user && Hash::check($field['password'], $user->password)){
-//                return redirect('/admin');
-//            }
-        if ($this->isAuth($field)) {
-            $role     = \auth()->user()->role;
-            $redirect = "/$role";
 
-//            return response()->json();
+
+        if ($this->isAuth($field)) {
+            $user = \auth()->user();
+            $role     = \auth()->user()->role;
+
+            $users = \App\Models\User::with('calon_siswa')->find($user->id);
+
+            if ($role == 'siswa') {
+                $statusPenerimaan = $users->calon_siswa->status_pendaftaran ?? null;
+                if ($statusPenerimaan !== 'diterima') {
+                    return redirect()->back()->withErrors(['password' => 'Anda belum diterima, silahkan menunggu paling lama 1x24 jam, dan coba login kembali'])->withInput();
+                }
+                // Jika siswa sudah diterima, tentukan redirect tujuan
+                $redirect = "/siswa";
+            } else {
+                $redirect = "/admin";
+            }
+
+            //            return response()->json();
 
             return redirect($redirect);
         }
 
         return redirect()->back()->withErrors(['password' => 'Password mismach.'])->withInput();
-
     }
 
     /**

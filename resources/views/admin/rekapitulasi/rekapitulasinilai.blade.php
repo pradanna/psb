@@ -110,7 +110,16 @@
                     },
                     {
                         data: 'status_penerimaan',
-                        name: 'status_penerimaan'
+                        name: 'status_penerimaan',
+                        render: function(data, x, row) {
+                            if (data == 'diterima') {
+                                return '<span class="badge bg-success">Lolos</span>'
+                            } else if (data == 'ditolak') {
+                                return '<span class="badge bg-danger">Tidak Lolos</span>'
+                            } else {
+                                return '<span class="badge bg-warning">Belum ditentukan</span>'
+                            }
+                        },
                     },
                     {
                         data: 'no_hp',
@@ -131,7 +140,7 @@
         function selectTopTwoStudents() {
             // Kirim permintaan ke backend dengan menggunakan AJAX
             $.ajax({
-                url: '/admin/rekapitulasi/select-top-two-students', // Sesuaikan dengan URL endpoint Anda
+                url: '/admin/rekapitulasi/select-top-students', // Sesuaikan dengan URL endpoint Anda
                 method: 'POST', // Sesuaikan dengan metode HTTP yang digunakan
                 async: true,
                 headers: {
@@ -143,12 +152,12 @@
                 },
                 success: function(response) {
                     // Tampilkan pesan sukses atau lakukan tindakan lainnya
-                    alert('Dua siswa terbaik berhasil dipilih!');
+                    alert('Perhitungan Sudah Selesai');
                 },
                 error: function(xhr, status, error) {
                     // Tangani kesalahan jika permintaan gagal
                     console.error(error);
-                    alert('Terjadi kesalahan saat memilih dua siswa terbaik.');
+                    alert('Terjadi kesalahan saat perhitungan rekapitulasi.');
                 }
             });
 

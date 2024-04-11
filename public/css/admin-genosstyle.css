@@ -817,6 +817,28 @@ input.form-control {
   font-size: 0.8rem;
 }
 
+.bt-grey {
+  all: unset;
+  transition: all 0.5s;
+  display: block;
+  background-color: grey;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+.bt-grey.full {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.bt-grey.sml {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+}
+
 .bt-primary {
   all: unset;
   transition: all 0.5s;

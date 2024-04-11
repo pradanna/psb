@@ -17,7 +17,7 @@ class CetakFormulirController extends Controller
         $trans = [];
         $pdf   = App::make('dompdf.wrapper');
 
-        $pdf->loadHTML($this->dataTransaksi($id))->setPaper('A4', 'potrait')->save('Laporan.pdf');
+        $pdf->loadHTML($this->dataTransaksi($id))->setPaper('A4', 'portrait')->save('Laporan.pdf');
 
         //        $data = $this->dataTransaksi($id);
         //         return view('admin/project/penawaran', ['data' => $data]);
