@@ -3,7 +3,7 @@
 @section('morecss')
     {{-- DROPZONE --}}
 
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection
 
 
@@ -37,28 +37,30 @@
                         <input type="hidden" id="d-id" name="d-id">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-namacalonsiswa" value="{{$data->status_pendaftaran}}"
-                                   name="p-namacalonsiswa" placeholder="Nama Calon Siswa">
+                            <input type="text" class="form-control" readonly id="p-namacalonsiswa"
+                                value="{{ $data->status_pendaftaran }}" name="p-namacalonsiswa"
+                                placeholder="Nama Calon Siswa">
                             <label for="p-namacalonsiswa" class="form-label">Status Pendaftaran</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-namacalonsiswa" value="{{$data->user->nama}}"
-                                   name="p-namacalonsiswa" placeholder="Nama Calon Siswa">
+                            <input type="text" class="form-control" readonly id="p-namacalonsiswa"
+                                value="{{ $data->user->nama }}" name="p-namacalonsiswa" placeholder="Nama Calon Siswa">
                             <label for="p-namacalonsiswa" class="form-label">Nama Calon Siswa</label>
                         </div>
 
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" readonly id="p-tempatlahir" value="{{$data->tempat_lahir}}"
-                                           name="p-tempatlahir" placeholder="Tempat Lahir">
+                                    <input type="text" class="form-control" readonly id="p-tempatlahir"
+                                        value="{{ $data->tempat_lahir }}" name="p-tempatlahir" placeholder="Tempat Lahir">
                                     <label for="p-tempatlahir" class="form-label">Tempat Lahir</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" readonly id="p-tanggallahir" value="{{$data->tanggal_lahir}}"
-                                           name="p-tanggallahir" placeholder="Tanggal Lahir">
+                                    <input type="text" class="form-control" readonly id="p-tanggallahir"
+                                        value="{{ $data->tanggal_lahir }}" name="p-tanggallahir"
+                                        placeholder="Tanggal Lahir">
                                     <label for="p-tanggallahir" class="form-label">Tanggal Lahir</label>
                                 </div>
                             </div>
@@ -66,49 +68,50 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-jeniskelamin" name="p-jeniskelamin" value="{{$data->jenis_kelamin}}"
-                                   placeholder="Jenis Kelamin">
+                            <input type="text" class="form-control" readonly id="p-jeniskelamin" name="p-jeniskelamin"
+                                value="{{ $data->jenis_kelamin }}" placeholder="Jenis Kelamin">
                             <label for="p-jeniskelamin" class="form-label">Jenis Kelamin</label>
                         </div>
 
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-alamat" name="p-alamat" value="{{$data->alamat}}"
-                                   placeholder="Judul Calon Siswa">
+                            <input type="text" class="form-control" readonly id="p-alamat" name="p-alamat"
+                                value="{{ $data->alamat }}" placeholder="Judul Calon Siswa">
                             <label for="p-alamat" class="form-label">Alamat</label>
                         </div>
 
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-asalsekolah" name="p-asalsekolah" value="{{$data->asal_sekolah}}"
-                                   placeholder="Asal Sekolah">
+                            <input type="text" class="form-control" readonly id="p-asalsekolah" name="p-asalsekolah"
+                                value="{{ $data->asal_sekolah }}" placeholder="Asal Sekolah">
                             <label for="p-asalsekolah" class="form-label">Asal Sekolah</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-asalsekolah" name="p-asalsekolah" value="{{$data->tahun_ajaran->nama}}"
-                                   placeholder="Tahun Ajaran">
+                            <input type="text" class="form-control" readonly id="p-asalsekolah" name="p-asalsekolah"
+                                value="{{ $data->tahun_ajaran->nama }}" placeholder="Tahun Ajaran">
                             <label for="p-asalsekolah" class="form-label">Tahun Ajaran</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" readonly id="p-nohp" name="p-nohp" value="{{$data->no_hp}}"
-                                   placeholder="Nomor HP">
+                            <input type="text" class="form-control" readonly id="p-nohp" name="p-nohp"
+                                value="{{ $data->no_hp }}" placeholder="Nomor HP">
                             <label for="p-nohp" class="form-label">No HP</label>
                         </div>
 
                         <div class="d-flex gap-1 ms-auto">
-                            <button type="button" class="bt-primary m-2 ">Lihat Hasil Tes</button>
-                            <button type="button" class="bt-warning m-2 " onclick="gantiStatus('diterima')">Terima Pendaftaran</button>
-                            <button type="button" class="bt-danger m-2 " onclick="gantiStatus('ditolak')">Tolak Pendaftaran</button>
+                            <button type="button" class="bt-primary m-2 " onclick="gantiStatus('diterima')">Terima
+                                Pendaftaran</button>
+                            <button type="button" class="bt-warning m-2 " onclick="gantiStatus('ditolak')">Tolak
+                                Pendaftaran</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="menu">
                         <p>Foto</p>
-                        <img src="{{ asset($data->url_foto) }}" style="width: 300px" class="mb-5"/>
+                        <img src="{{ asset($data->url_foto) }}" style="width: 300px" class="mb-5" />
 
                         <p>Ijazah</p>
-                        <img src="{{ asset($data->url_ijazah) }}" style="width: 100%"/>
+                        <img src="{{ asset($data->url_ijazah) }}" style="width: 100%" />
                     </div>
                 </div>
 
@@ -130,10 +133,11 @@
 
         function gantiStatus(a) {
             let form = {
-                '_token': '{{csrf_token()}}',
+                '_token': '{{ csrf_token() }}',
                 'status': a
             }
-            saveDataObjectFormData('Status pendaftaran calon siswa '+a, form, '{{route('admin.calonsiswa.detail.status',['siswa' => request('siswa')])}}')
+            saveDataObjectFormData('Status pendaftaran calon siswa ' + a, form,
+                '{{ route('admin.calonsiswa.detail.status', ['siswa' => request('siswa')]) }}')
             return false;
         }
     </script>

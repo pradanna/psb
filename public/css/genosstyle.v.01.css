@@ -146,6 +146,10 @@ body {
   margin: 0 50px;
 }
 
+.bg-web {
+  background-color: #fdfdfd;
+}
+
 .g-container-left {
   width: 100%;
   padding: 5% 100px;
