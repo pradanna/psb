@@ -35,14 +35,14 @@ class RekapitulasiController extends Controller
         }])->where('tahun_ajaran_id', $tahunAjaran)->orderBy('tempat_lahir', 'desc')->get();
 
         // Sort the collection by the scored attribute
-        $sortedCalonSiswa = $calonSiswa->sortByDesc(function ($siswa) {
-            if ($siswa->user->registrans->scored !== null) {
-                return $siswa->user->registrans->scored;
-            }
-            return $siswa->user->nama;
-        });
+        // $sortedCalonSiswa = $calonSiswa->sortByDesc(function ($siswa) {
+        //     if ($siswa->user->registrans->scored !== null) {
+        //         return $siswa->user->registrans->scored;
+        //     }
+        //     return $siswa->user->nama;
+        // });
 
-        return response()->json($sortedCalonSiswa->values()->all(), 200);
+        return response()->json($calonSiswa->values()->all(), 200);
         // Kembalikan data dalam bentuk response JSON
     }
 
