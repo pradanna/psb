@@ -106,7 +106,14 @@
 
                     {
                         data: 'user.registrans.scored',
-                        name: 'user.registrans.scored'
+                        name: 'user.registrans.scored',
+                        render: function(data, x, row) {
+                            if (data == null) {
+                                return '<span class="badge bg-success">belum mengerjakan</span>'
+                            } else {
+                                return data;
+                            }
+                        },
                     },
                     {
                         data: 'status_penerimaan',
