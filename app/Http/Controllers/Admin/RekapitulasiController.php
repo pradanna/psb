@@ -36,7 +36,10 @@ class RekapitulasiController extends Controller
 
         // Sort the collection by the scored attribute
         $sortedCalonSiswa = $calonSiswa->sortByDesc(function ($siswa) {
-            return $siswa->user->registrans->scored;
+            if ($siswa->user->registrans->scored !== null) {
+                return $siswa->user->registrans->scored;
+            }
+            return $siswa->user->nama;
         });
 
         return response()->json($sortedCalonSiswa->values()->all(), 200);
