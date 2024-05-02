@@ -109,6 +109,15 @@
             showData()
         })
 
+        $(document).on('click', '#editData', function() {
+            let id = $(this).data('id')
+            let nama = $(this).data('nama')
+            let jumlah_siswa = $(this).data('jumlah_siswa')
+            $('#nama').val(nama)
+            $('#id').val(id)
+            $('#jumlah_siswa').val(jumlah_siswa)
+        })
+
         function showData() {
             let column = [{
                     className: "text-center",
@@ -141,6 +150,10 @@
                             ' </a>' +
                             ' <a class="btn-danger-sm" id="deleteData" data-id="' + data + '" data-nama="' + row
                             .nama + '">Hapus' +
+                            ' </a>' +
+                            ' <a class="btn-primary-sm" id="editData"  data-nama="' + row.nama +
+                            '" data-jumlah_siswa="' +
+                            row.jumlah_siswa + '" data-id="' + row.id + '">Ubah' +
                             ' </a>' +
                             ' </span>';
                     }

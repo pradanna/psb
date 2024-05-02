@@ -10,10 +10,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin-genosstyle.css') }}" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-          rel="stylesheet">
+    {{-- BOOTSTRAP --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('/css/sweetalert2.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
@@ -47,29 +46,35 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" required class="form-control login" id="username" name="username" value="{{old('username')}}">
+                                <input type="text" required class="form-control login" id="username" name="username"
+                                    value="{{ old('username') }}">
                                 @if ($errors->has('username'))
                                     <p class="text-danger" style="font-size: 0.8em">
-                                        {{ $errors->first('username')}}
+                                        {{ $errors->first('username') }}
                                     </p>
                                 @endif
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" required class="form-control login" id="password" name="password">
+                                <input type="password" required class="form-control login" id="password"
+                                    name="password">
                                 @if ($errors->has('password'))
                                     <p class="text-danger" style="font-size: 0.8em">
-                                        {{ $errors->first('password')}}
+                                        {{ $errors->first('password') }}
                                     </p>
                                 @endif
                             </div>
                             <div class="mb-3">
                                 <div class="d-flex gap-2">
-                                    <input type="text" class="form-control login" required id="captchaText" name="captcha" onkeyup="changetext()">
+                                    <input type="text" class="form-control login" required id="captchaText"
+                                        name="captcha" onkeyup="changetext()">
                                     <div class="d-flex">
                                         <canvas id="captchaCanvas" width="150" height="35"></canvas>
-                                        <button type="button" id="generateCaptcha" style="width: 40px"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-2 h-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                        <button type="button" id="generateCaptcha" style="width: 40px"> <svg
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-2 h-2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                                             </svg></button>
                                         <div>
                                         </div>
@@ -90,27 +95,24 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
-    <script src="{{asset('/js/captcha.js')}}"></script>
+    <script src="{{ asset('/js/captcha.js') }}"></script>
 
-<script>
-    function confirmSave() {
-        let captchaText = $('#captchaText').val()
-        if (captchaText !== captcha) {
-            $('#errorCapth').html('Captcha tidak sesuai')
-            return false;
+    <script>
+        function confirmSave() {
+            let captchaText = $('#captchaText').val()
+            if (captchaText !== captcha) {
+                $('#errorCapth').html('Captcha tidak sesuai')
+                return false;
+            }
         }
-    }
 
-    function changetext() {
-        $('#errorCapth').empty()
-    }
-</script>
+        function changetext() {
+            $('#errorCapth').empty()
+        }
+    </script>
 
 </body>
 
